@@ -1,0 +1,30 @@
+{
+  "name": "cypress-applitools-webinar",
+  "version": "1.0.0",
+  "description": "Companion Code to \"Functional and Visual Testing with Cypress.io and Applitools\" webinar",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "concurrently npm:ci:client npm:ci:server",
+    "ci:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "build": "cd client && npm run build",
+    "start": "concurrently npm:start:client npm:start:server",
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/applitools/cypress-applitools-webinar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/applitools/cypress-applitools-webinar/issues"
+  },
+  "homepage": "https://github.com/applitools/cypress-applitools-webinar#readme",
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  }
+}

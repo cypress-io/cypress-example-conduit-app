@@ -4,7 +4,8 @@ import {
   ASYNC_END,
   LOGIN,
   LOGOUT,
-  REGISTER
+  REGISTER,
+  APP_LOAD,
 } from './constants/actionTypes';
 
 const promiseMiddleware = store => next => action => {
@@ -33,7 +34,11 @@ const promiseMiddleware = store => next => action => {
         console.log('ERROR', error);
         action.error = true;
         action.payload = error.response.body;
-        if (!action.skipTracking) {
+        if (action.payload.errors.unauthorized) {
+          store.dispatch({type: LOGOUT});
+          store.dispatch({type: APP_LOAD});
+          return;
+        } else if (!action.skipTracking) {
           store.dispatch({ type: ASYNC_END, promise: action.payload });
         }
         store.dispatch(action);

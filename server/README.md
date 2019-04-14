@@ -2,6 +2,33 @@
 
 Companion Code to "Functional and Visual Testing with Cypress.io and Applitools" webinar
 
+## Getting started
+
+1. First, you install the npm dependencies:
+
+   ```sh
+   npm ci
+   ```
+
+   This will `npm ci` both the backend and the frontend
+
+1. Then, build the code:
+
+  ```sh
+  npm run build
+  ```
+
+  This is not formally needed for running in dev, as it builds the production build for the frontend
+
+1. Last, start the frontend and backend server:
+
+   ```sh
+   npm start
+   ```
+
+1. To see the application, goto http://localhost:4100
+
+
 ## Copyright Notices
 
 * Code under `client` directory was copied from [here](https://github.com/gothinkster/react-redux-realworld-example-app).

@@ -7,7 +7,7 @@
   "scripts": {
     "postinstall": "concurrently npm:ci:client npm:ci:server",
     "ci:client": "cd client && npm install",
-    "install:server": "cd server && npm install",
+    "ci:server": "cd server && npm install",
     "build": "cd client && npm run build",
     "start": "concurrently npm:start:client npm:start:server",
     "start:client": "cd client && npm start",

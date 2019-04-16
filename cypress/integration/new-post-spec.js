@@ -4,13 +4,15 @@ import { title, about, article, tags } from '../fixtures/post'
 
 describe('New post', () => {
   beforeEach(() => {
+    cy.task('deleteAllArticles')
     cy.login()
   })
 
   it('adds a new post', () => {
     cy.contains('a.nav-link', 'New Post').click()
 
-    cy.get('[data-cy=title]').type(title)
+    const randomTitle = `${title} ${Cypress._.random(1e6, 1e7)}`
+    cy.get('[data-cy=title]').type(randomTitle)
     cy.get('[data-cy=about]').type(about)
 
     // typing entire post as a human user takes too long

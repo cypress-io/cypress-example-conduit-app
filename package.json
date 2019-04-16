@@ -27,6 +27,8 @@
   "devDependencies": {
     "common-tags": "1.8.0",
     "concurrently": "^4.1.0",
-    "cypress": "3.2.0"
+    "cypress": "3.2.0",
+    "knex": "0.16.5",
+    "sqlite3": "4.0.6"
   }
 }

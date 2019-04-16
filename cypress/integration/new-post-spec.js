@@ -11,12 +11,17 @@ describe('New post', () => {
   it('adds a new post', () => {
     cy.contains('a.nav-link', 'New Post').click()
 
-    const randomTitle = `${title} ${Cypress._.random(1e6, 1e7)}`
-    cy.get('[data-cy=title]').type(randomTitle)
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type(title)
     cy.get('[data-cy=about]').type(about)
 
     // typing entire post as a human user takes too long
     // just set it at once!
+
+    // instead of
+    // cy.get('[data-cy=article]').type(article)
+
+    // dispatch Redux actions
     cy.window()
       .its('store')
       .invoke('dispatch', {
@@ -24,9 +29,14 @@ describe('New post', () => {
         key: 'body',
         value: article
       })
-    // cy.get('[data-cy=article]').invoke('text', article)
 
     // need to click "Enter" after each tag
     cy.get('[data-cy=tags]').type(tags.split(',').join('{enter}') + '{enter}')
+
+    // and post the new article
+    cy.contains('button', 'Publish Article').click()
+
+    // the url should show the new article
+    cy.url().should('include', '/article/' + Cypress._.kebabCase(title))
   })
 })

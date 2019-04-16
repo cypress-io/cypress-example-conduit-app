@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/applitools/cypress-applitools-webinar#readme",
   "devDependencies": {
+    "common-tags": "1.8.0",
     "concurrently": "^4.1.0",
     "cypress": "3.2.0"
   }

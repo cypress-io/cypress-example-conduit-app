@@ -2,7 +2,9 @@
 
 Companion Code to "Functional and Visual Testing with Cypress.io and Applitools" webinar
 
-## Functiona tests
+## Functional tests
+
+in folder [cypress/integration](cypress/integration)
 
 - installed [Cypress](https://www.cypress.io) with `npm i -D cypress`
 - scaffolded Cypress folder with `npx @bahmutov/cly init`

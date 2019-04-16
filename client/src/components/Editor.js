@@ -160,6 +160,7 @@ class Editor extends React.Component {
                   <button
                     className='btn btn-lg pull-xs-right btn-primary'
                     type='button'
+                    data-cy='publish'
                     disabled={this.props.inProgress}
                     onClick={this.submitForm}
                   >

@@ -34,7 +34,7 @@ describe('New post', () => {
     cy.get('[data-cy=tags]').type(tags.split(',').join('{enter}') + '{enter}')
 
     // and post the new article
-    cy.contains('button', 'Publish Article').click()
+    cy.get('[data-cy=publish]').click()
 
     // the url should show the new article
     cy.url().should('include', '/article/' + Cypress._.kebabCase(title))

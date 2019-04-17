@@ -4,7 +4,16 @@ Companion Code to "Functional and Visual Testing with Cypress.io and Applitools"
 
 ## Functional tests
 
-in folder [cypress/integration](cypress/integration)
+Tests are in the folder [cypress/integration](cypress/integration)
+
+- [login-spec.js](cypress/integration/login-spec.js) shows successful and unsuccessful login via user interface
+- [feeds-spec.js](cypress/integration/feeds-spec.js) shows how to login using XHR request bypassing the login form UI
+- [new-post-spec.js](cypress/integration/new-post-spec.js) adds a new post
+  * before each test, all existing posts are deleted using `cy.task('deleteAllArticles')` command. This task is defined in [cypress/plugins/index.js](cypress/plugins/index.js) file.
+  * before each test, we log the user in via custom command `cy.login()` defined in [cypress/support/index.js](cypress/support/index.js) file
+  * we also import the post content using `import` directives, the post itself is in file [cypress/fixtures/post.js](cypress/fixtures/post.js)
+
+## Test setup
 
 - installed [Cypress](https://www.cypress.io) with `npm i -D cypress`
 - scaffolded Cypress folder with `npx @bahmutov/cly init`

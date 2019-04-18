@@ -19,8 +19,7 @@ module.exports = (on, config) => {
       const onError = err =>
         err.toString().includes('no such table') ? null : Promise.reject(err)
 
-      // truncates all tables created by previous tests
-      // or manually by using the application
+      // truncates all tables which removes data left by previous tests
       return Promise.all([
         knex.truncate('Articles').catch(onError),
         knex.truncate('ArticleTags').catch(onError),

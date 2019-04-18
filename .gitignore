@@ -63,5 +63,5 @@ typings/
 # MacOS
 .DS_Store
 
-/cypress/videos/*.mp4
+/cypress/videos/
 /cypress/screenshots/

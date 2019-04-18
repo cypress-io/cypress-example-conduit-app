@@ -1,8 +1,10 @@
+import '@applitools/eyes-cypress/commands'
+
 // a custom Cypress command to login using XHR call
 // and then set the received token in the local storage
+
 Cypress.Commands.add('login', () => {
   cy.request('POST', 'http://localhost:3000/api/users/login', {
-    // user object contains email and password
     user: Cypress.env('user'),
   })
     .its('body.user.token')

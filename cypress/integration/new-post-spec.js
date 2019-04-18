@@ -3,6 +3,7 @@
 import { title, about, article, tags } from '../fixtures/post'
 
 describe('New post', () => {
+  before(() => cy.registerUserIfNeeded())
   beforeEach(() => {
     cy.task('deleteAllArticles')
     cy.login()

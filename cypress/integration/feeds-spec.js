@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 describe('Conduit', () => {
+  before(() => cy.registerUserIfNeeded())
   beforeEach(() => {
     cy.request('POST', 'http://localhost:3000/api/users/login', {
       user: Cypress.env('user')

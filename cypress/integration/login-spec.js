@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 describe('Conduit Login', () => {
+  before(() => cy.registerUserIfNeeded())
   beforeEach(() => {
     cy.visit('/')
     // we are not logged in

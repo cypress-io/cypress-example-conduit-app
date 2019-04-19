@@ -5,5 +5,7 @@
       "email": "tester@test.com",
       "password": "password1234"
     }
-  }
+  },
+  "viewportHeight": 1000,
+  "viewportWidth": 1000
 }

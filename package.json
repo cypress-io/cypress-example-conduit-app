@@ -11,7 +11,9 @@
     "build": "cd client && npm run build",
     "start": "concurrently npm:start:client npm:start:server",
     "start:client": "cd client && npm start",
-    "start:server": "cd server && npm start"
+    "start:server": "cd server && npm start",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "repository": {
     "type": "git",

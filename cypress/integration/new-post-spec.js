@@ -9,10 +9,27 @@ describe('New post', () => {
     cy.login()
   })
 
-  it('adds a new post', () => {
+  it('writes a post and comments on it', () => {
     cy.contains('a.nav-link', 'New Post').click()
 
     // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+    cy.get('[data-cy=article]').type('this post is **important**.')
+    cy.get('[data-cy=tags]').type('test{enter}')
+    cy.get('[data-cy=publish]').click()
+
+    cy.get('[data-cy=comment-text]').type('great post 👍')
+    cy.get('[data-cy=post-comment]').click()
+
+    cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+  })
+
+  it('adds a new post', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // instead hard-coding text in this test
+    // the blog post contents comes from cypress/fixtures/post.js
     cy.get('[data-cy=title]').type(title)
     cy.get('[data-cy=about]').type(about)
 

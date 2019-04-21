@@ -43,7 +43,7 @@ describe('Conduit Login', () => {
     cy.get('input[type="password"]').type(user.password)
     cy.get('button[type="submit"]').click()
 
-    cy.contains('Your Feed')
+    cy.get('.article-preview')
 
     cy.eyesCheckWindow('Empty home page after login')
   })

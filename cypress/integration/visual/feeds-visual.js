@@ -28,7 +28,7 @@ describe('Conduit', () => {
     // cy.contains('a.nav-link', 'Your Feed').should('have.class', 'active')
     // cy.contains('a.nav-link', 'Global Feed').should('not.have.class', 'active')
 
-    cy.contains('Global Feed').click()
+    cy.get('.article-preview')
 
     cy.eyesCheckWindow('feed')
   })

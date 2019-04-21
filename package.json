@@ -13,7 +13,9 @@
     "start:client": "cd client && npm start",
     "start:server": "cd server && npm start",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "cypress:test": "cypress run -s 'cypress/integration/**/*-spec.js'",
+    "test": "start-test start 4100 cypress:test"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
     "concurrently": "^4.1.0",
     "cypress": "3.2.0",
     "knex": "0.16.5",
-    "sqlite3": "4.0.6"
+    "sqlite3": "4.0.6",
+    "start-server-and-test": "^1.7.13"
   }
 }

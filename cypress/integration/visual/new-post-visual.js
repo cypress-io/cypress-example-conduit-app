@@ -43,7 +43,7 @@ describe('New post', () => {
       })
 
     // need to click "Enter" after each tag
-    cy.get('[data-cy=tags]').type(tags.split(',').join('{enter}') + '{enter}')
+    cy.get('[data-cy=tags]').type(tags.join('{enter}') + '{enter}')
 
     cy.eyesCheckWindow('Filled new post page')
 

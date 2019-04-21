@@ -36,12 +36,15 @@ describe('Conduit Login', () => {
   it('logs in', () => {
     cy.contains('a.nav-link', 'Sign in').click()
 
+    cy.eyesCheckWindow('Login page')
+
     const user = Cypress.env('user')
     cy.get('input[type="email"]').type(user.email)
     cy.get('input[type="password"]').type(user.password)
     cy.get('button[type="submit"]').click()
 
     cy.contains('Your Feed')
+
     cy.eyesCheckWindow('Empty home page after login')
   })
 })

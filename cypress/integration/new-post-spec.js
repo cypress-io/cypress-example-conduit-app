@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import { title, about, article, tags } from '../fixtures/post'
+import { stripIndent } from 'common-tags'
 
 describe('New post', () => {
   before(() => cy.registerUserIfNeeded())
@@ -23,6 +24,50 @@ describe('New post', () => {
     cy.get('[data-cy=post-comment]').click()
 
     cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+  })
+
+  it('sets tags', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+    cy.get('[data-cy=article]').type('this post is **important**.')
+
+    const tags = ['code', 'testing', 'cypress.io']
+    cy.get('[data-cy=tags]').type(tags.join('{enter}') + '{enter}')
+    cy.get('[data-cy=publish]').click()
+
+    // check that each tag is displayed after post is shown
+    cy.url().should('match', /my-title$/)
+    tags.forEach(tag => cy.contains('.tag-default', tag))
+  })
+
+  it('sets the post body at once', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+
+    // to speed up creating the post, set the text as value
+    // and then trigger change event by typing "Enter"
+    const post = stripIndent`
+      # Fast tests
+
+      > Speed up your tests using direct access to DOM elements
+
+      You can set long text all at once and then trigger \`onChange\` event.
+    `
+
+    cy.get('[data-cy=article]')
+      .invoke('val', post)
+      .type('{enter}')
+
+    cy.get('[data-cy=tags]').type('test{enter}')
+    cy.get('[data-cy=publish]').click()
+
+    cy.contains('h1', 'my title')
   })
 
   it('adds a new post', () => {

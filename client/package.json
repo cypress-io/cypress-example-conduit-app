@@ -8,6 +8,8 @@
     "react-scripts": "1.1.1"
   },
   "dependencies": {
+    "@babel/core": "7.4.5",
+    "@babel/preset-react": "7.0.0",
     "history": "^4.6.3",
     "marked": "^0.3.6",
     "prop-types": "^15.5.10",

@@ -31,11 +31,15 @@
   "homepage": "https://github.com/applitools/cypress-applitools-webinar#readme",
   "devDependencies": {
     "@applitools/eyes-cypress": "^3.6.6",
+    "babel-plugin-istanbul": "5.1.4",
     "common-tags": "1.8.0",
     "concurrently": "^4.1.0",
     "cypress": "3.2.0",
+    "cypress-istanbul": "1.2.0",
+    "istanbul-lib-coverage": "2.0.5",
     "knex": "0.16.5",
-    "sqlite3": "4.0.6",
+    "nyc": "14.1.1",
+    "sqlite3": "4.0.8",
     "start-server-and-test": "^1.7.13"
   }
 }

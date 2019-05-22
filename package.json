@@ -15,7 +15,8 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:test": "cypress run -s 'cypress/integration/**/*-spec.js'",
-    "test": "start-test start 4100 cypress:test"
+    "test": "start-test start 4100 cypress:test",
+    "dev": "start-test start 4100 cypress:open"
   },
   "repository": {
     "type": "git",

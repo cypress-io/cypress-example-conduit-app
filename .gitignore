@@ -65,3 +65,4 @@ typings/
 
 /cypress/videos/
 /cypress/screenshots/
+dist

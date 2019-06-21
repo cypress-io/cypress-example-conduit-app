@@ -17,7 +17,7 @@
     "cypress:test": "cypress run -s 'cypress/integration/**/*-spec.js'",
     "test": "start-test start 4100 cypress:test",
     "dev": "start-test start 4100 cypress:open",
-    "cp:sqlite3": "cp -r node_sqlite3 node_modules/sqlite3/lib/binding"
+    "cp:sqlite3": "cp -r node_sqlite3/ node_modules/sqlite3/lib/binding"
   },
   "repository": {
     "type": "git",

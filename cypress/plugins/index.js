@@ -7,6 +7,7 @@ module.exports = (on, config) => {
 
   // tasks for code coverage
   on('task', require('@cypress/code-coverage/task'))
+
   // tasks for resetting database during tests
   on('task', {
     deleteAllArticles () {

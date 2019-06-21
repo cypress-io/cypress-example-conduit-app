@@ -3,8 +3,10 @@ import '@cypress/code-coverage/support'
 // a custom Cypress command to login using XHR call
 // and then set the received token in the local storage
 
+const apiUrl = Cypress.env('apiUrl')
+
 Cypress.Commands.add('login', () => {
-  cy.request('POST', 'http://localhost:3000/api/users/login', {
+  cy.request('POST', `${apiUrl}/api/users/login`, {
     user: Cypress.env('user')
   })
     .its('body.user.token')
@@ -24,7 +26,7 @@ Cypress.Commands.add('login', () => {
 Cypress.Commands.add('registerUserIfNeeded', () => {
   cy.request({
     method: 'POST',
-    url: 'http://localhost:3000/api/users',
+    url: `${apiUrl}/api/users`,
     body: {
       user: {
         username: 'testuser',

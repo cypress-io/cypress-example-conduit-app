@@ -41,12 +41,12 @@
     "toys": "2.x.x"
   },
   "devDependencies": {
-    "code": "5.x.x",
-    "eslint": "5.x.x",
-    "eslint-config-hapi": "12.x.x",
-    "eslint-plugin-hapi": "4.x.x",
-    "hpal-debug": "1.x.x",
-    "lab": "18.x.x",
-    "newman": "4.x.x"
+    "code": "5.2.4",
+    "eslint": "5.12.1",
+    "eslint-config-hapi": "12.0.0",
+    "eslint-plugin-hapi": "4.1.0",
+    "hpal-debug": "1.2.0",
+    "lab": "18.0.1",
+    "newman": "4.3.1"
   }
 }

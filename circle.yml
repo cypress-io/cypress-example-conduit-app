@@ -6,6 +6,8 @@ workflows:
   build:
     jobs:
       - cypress/run:
+          pre-steps:
+            - run: npm config set unsafe-perm true
           executor: cypress/base-10
           start: npm start
           wait-on: http://localhost:4100

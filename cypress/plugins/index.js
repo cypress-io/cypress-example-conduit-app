@@ -6,7 +6,7 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
 
   // tasks for code coverage
-  on('task', require('cypress-istanbul/task'))
+  on('task', require('@cypress/code-coverage/task'))
   // tasks for resetting database during tests
   on('task', {
     deleteAllArticles () {
@@ -51,5 +51,3 @@ module.exports = (on, config) => {
     registerNewUserIfNeeded () {}
   })
 }
-
-require('@applitools/eyes-cypress')(module)

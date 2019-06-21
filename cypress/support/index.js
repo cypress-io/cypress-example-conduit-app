@@ -1,5 +1,4 @@
-import '@applitools/eyes-cypress/commands'
-import 'cypress-istanbul/support'
+import '@cypress/code-coverage/support'
 
 // a custom Cypress command to login using XHR call
 // and then set the received token in the local storage

@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "postinstall": "concurrently npm:ci:client npm:ci:server",
+    "postinstall": "concurrently npm:ci:client npm:ci:server npm:cp:sqlite3",
     "ci:client": "cd client && npm install",
     "ci:server": "cd server && npm install",
     "build": "cd client && npm run build",
@@ -16,7 +16,8 @@
     "cypress:run": "cypress run",
     "cypress:test": "cypress run -s 'cypress/integration/**/*-spec.js'",
     "test": "start-test start 4100 cypress:test",
-    "dev": "start-test start 4100 cypress:open"
+    "dev": "start-test start 4100 cypress:open",
+    "npm:cp:sqlite3": "cp -r node_sqlite3 node_modules/sqlite3/lib/binding"
   },
   "repository": {
     "type": "git",

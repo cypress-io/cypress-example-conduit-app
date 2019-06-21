@@ -114,9 +114,9 @@ describe('New post', () => {
           description: about,
           body: article
         })
-        expect(firstPost)
-          .property('tagList')
-          .to.deep.equal(tags)
+        expect(firstPost.tagList).to.be.an('array')
+        const sortedTags = firstPost.tagList.sort()
+        expect(sortedTags).to.deep.equal(tags.sort())
       })
   })
 })

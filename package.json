@@ -1,7 +1,7 @@
 {
-  "name": "cypress-applitools-webinar",
+  "name": "realworld",
   "version": "1.0.0",
-  "description": "Companion Code to \"Functional and Visual Testing with Cypress.io and Applitools\" webinar",
+  "description": "Fork of realworld app to show full e2e code coverage",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -20,17 +20,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/applitools/cypress-applitools-webinar.git"
+    "url": "git+https://github.com/bahmutov/realworld.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/applitools/cypress-applitools-webinar/issues"
+    "url": "https://github.com/bahmutov/realworld/issues"
   },
-  "homepage": "https://github.com/applitools/cypress-applitools-webinar#readme",
+  "homepage": "https://github.com/bahmutov/realworld#readme",
   "devDependencies": {
-    "@applitools/eyes-cypress": "^3.6.6",
     "babel-plugin-istanbul": "5.1.4",
     "common-tags": "1.8.0",
     "concurrently": "^4.1.0",

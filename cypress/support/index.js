@@ -1,10 +1,9 @@
 import '@cypress/code-coverage/support'
 
-// a custom Cypress command to login using XHR call
-// and then set the received token in the local storage
-
 const apiUrl = Cypress.env('apiUrl')
 
+// a custom Cypress command to login using XHR call
+// and then set the received token in the local storage
 Cypress.Commands.add('login', () => {
   cy.request('POST', `${apiUrl}/api/users/login`, {
     user: Cypress.env('user')

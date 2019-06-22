@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "code": "5.2.4",
-    "eslint": "5.12.1",
+    "eslint": "5.16.0",
     "eslint-config-hapi": "12.0.0",
     "eslint-plugin-hapi": "4.1.0",
     "hpal-debug": "1.2.0",

@@ -29,7 +29,7 @@
     "haute-couture": ">=3.1.x <4",
     "joi": "14.x.x",
     "jsonwebtoken": "8.x.x",
-    "knex": "0.16.x",
+    "knex": "0.17.x",
     "objection": "1.x.x",
     "objection-db-errors": "1.x.x",
     "randomstring": "1.x.x",

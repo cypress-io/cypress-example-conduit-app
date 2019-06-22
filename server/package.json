@@ -23,7 +23,7 @@
     "bounce": "1.x.x",
     "confidence": "4.x.x",
     "dotenv": "6.x.x",
-    "glue": "5.x.x",
+    "glue": "6.x",
     "hapi": "18.x.x",
     "hapi-auth-jwt2": "8.x.x",
     "haute-couture": ">=3.1.x <4",

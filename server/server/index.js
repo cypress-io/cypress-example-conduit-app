@@ -17,14 +17,7 @@ exports.deployment = async start => {
   /* istanbul ignore next */
   if (global.__coverage__) {
     console.log('registering coverage middleware')
-    // https://hapijs.com/tutorials/routing?lang=en_US
-    server.route({
-      method: 'GET',
-      path: '/__coverage__',
-      handler () {
-        return { coverage: global.__coverage__ }
-      }
-    })
+    require('@cypress/code-coverage/middleware/hapi')(server)
   }
 
   if (!start) {

@@ -5,7 +5,7 @@ const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
       <ul className='nav navbar-nav pull-xs-right'>
-        <li className='nav-item'>
+        <li className='nav-item' data-cy='home'>
           <Link to='/' className='nav-link'>
             Home
           </Link>
@@ -32,7 +32,7 @@ const LoggedInView = props => {
   if (props.currentUser) {
     return (
       <ul className='nav navbar-nav pull-xs-right'>
-        <li className='nav-item'>
+        <li className='nav-item' data-cy='home'>
           <Link to='/' className='nav-link'>
             Home
           </Link>
@@ -40,13 +40,15 @@ const LoggedInView = props => {
 
         <li className='nav-item'>
           <Link to='/editor' className='nav-link'>
-            <i className='ion-compose' />&nbsp;New Post
+            <i className='ion-compose' />
+            &nbsp;New Post
           </Link>
         </li>
 
         <li className='nav-item'>
           <Link to='/settings' className='nav-link'>
-            <i className='ion-gear-a' />&nbsp;Settings
+            <i className='ion-gear-a' />
+            &nbsp;Settings
           </Link>
         </li>
 

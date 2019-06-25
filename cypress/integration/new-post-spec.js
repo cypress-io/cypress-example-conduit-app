@@ -26,6 +26,30 @@ describe('New post', () => {
     cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
   })
 
+  it('can fav article', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+    cy.get('[data-cy=article]').type('this post is **important**.')
+    cy.get('[data-cy=tags]').type('test{enter}')
+    cy.get('[data-cy=publish]').click()
+
+    cy.get('[data-cy=home]').click()
+    cy.get('[data-cy=global-feed]').click()
+    cy.get('.article-preview')
+      .should('have.length', 1)
+      .first()
+      .find('[data-cy=fav-article]')
+      .click()
+
+    // now go to my profile and see this article
+    cy.get('[data-cy=profile]').click()
+    cy.location('pathname').should('equal', '/@testuser')
+    cy.contains('.article-preview', 'my title')
+  })
+
   it('deletes comment', () => {
     cy.contains('a.nav-link', 'New Post').click()
 

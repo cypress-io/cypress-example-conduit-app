@@ -20,7 +20,8 @@
     "test": "start-test start 4100 cypress:test",
     "dev": "start-test start 4100 cypress:open",
     "dev:coverage": "start-test start:coverage 4100 cypress:open",
-    "cp:sqlite3": "cp -r node_sqlite3/node-v57-darwin-x64 node_modules/sqlite3/lib/binding && cp -r node_sqlite3/node-v57-linux-x64 node_modules/sqlite3/lib/binding"
+    "cp:sqlite3": "cp -r node_sqlite3/node-v57-darwin-x64 node_modules/sqlite3/lib/binding && cp -r node_sqlite3/node-v57-linux-x64 node_modules/sqlite3/lib/binding",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "babel-plugin-istanbul": "5.1.4",
     "common-tags": "1.8.0",
     "concurrently": "4.1.0",
+    "coveralls": "3.0.4",
     "cypress": "3.3.1",
     "istanbul-lib-coverage": "2.0.5",
     "knex": "0.17.6",

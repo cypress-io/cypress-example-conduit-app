@@ -16,3 +16,6 @@ workflows:
           post-steps:
             - store_artifacts:
                 path: coverage
+            # send code coverage to coveralls.io
+            # https://coveralls.io/github/bahmutov/realworld
+            - run: npm run coveralls

@@ -26,7 +26,27 @@ describe('New post', () => {
     cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
   })
 
-  it('can fav article', () => {
+  it('can edit an article', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+    cy.get('[data-cy=article]').type('this post is **important**.')
+    cy.get('[data-cy=tags]').type('test{enter}')
+    cy.get('[data-cy=publish]').click()
+    cy.location('pathname').should('equal', '/article/my-title')
+
+    cy.get('[data-cy=edit-article]').click()
+    cy.location('pathname').should('equal', '/editor/my-title')
+    cy.get('[data-cy=title]')
+      .clear()
+      .type('a brand new title')
+    cy.get('[data-cy=publish]').click()
+    cy.location('pathname').should('equal', '/article/a-brand-new-title')
+  })
+
+  it('can fav and unfav an article', () => {
     cy.contains('a.nav-link', 'New Post').click()
 
     // I have added "data-cy" attributes to select input fields
@@ -53,6 +73,9 @@ describe('New post', () => {
     cy.get('[data-cy=profile]').click()
     cy.location('pathname').should('equal', '/@testuser')
     cy.contains('.article-preview', 'my title')
+      // now unfav article
+      .find('[data-cy=fav-article]')
+      .click()
   })
 
   it('deletes comment', () => {

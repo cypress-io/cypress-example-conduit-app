@@ -19,6 +19,7 @@ const ArticleActions = props => {
         <Link
           to={`/editor/${article.slug}`}
           className='btn btn-outline-secondary btn-sm'
+          data-cy='edit-article'
         >
           <i className='ion-edit' /> Edit Article
         </Link>

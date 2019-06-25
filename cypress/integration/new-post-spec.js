@@ -4,9 +4,9 @@ import { title, about, article, tags } from '../fixtures/post'
 import { stripIndent } from 'common-tags'
 
 describe('New post', () => {
-  before(() => cy.registerUserIfNeeded())
   beforeEach(() => {
-    cy.task('deleteAllArticles')
+    cy.task('cleanDatabase')
+    cy.registerUserIfNeeded()
     cy.login()
   })
 

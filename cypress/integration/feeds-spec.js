@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
 describe('Conduit', () => {
-  before(() => cy.registerUserIfNeeded())
   beforeEach(() => {
-    cy.task('deleteAllArticles')
+    cy.task('cleanDatabase')
+    cy.registerUserIfNeeded()
     cy.login()
   })
 

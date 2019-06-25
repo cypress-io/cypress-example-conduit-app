@@ -8,11 +8,10 @@ describe('following user', () => {
     password: 'seconduser'
   }
 
-  before(() => cy.registerUserIfNeeded(secondUser))
-  before(() => cy.registerUserIfNeeded())
-
   beforeEach(() => {
-    cy.task('deleteAllArticles')
+    cy.task('cleanDatabase')
+    cy.registerUserIfNeeded(secondUser)
+    cy.registerUserIfNeeded()
   })
 
   it('can follow second user', () => {

@@ -10,7 +10,7 @@ module.exports = (on, config) => {
 
   // tasks for resetting database during tests
   on('task', {
-    deleteAllArticles () {
+    cleanDatabase () {
       const filename = join(__dirname, '..', '..', 'server', '.tmp.db')
       const knex = knexFactory({
         client: 'sqlite3',
@@ -26,6 +26,13 @@ module.exports = (on, config) => {
 
       // truncates all tables which removes data left by previous tests
       return Promise.all([
+        knex
+          .truncate('Users')
+          .catch(err =>
+            err.toString().includes('no such table')
+              ? undefined
+              : Promise.reject(err)
+          ),
         knex
           .truncate('Articles')
           .catch(err =>

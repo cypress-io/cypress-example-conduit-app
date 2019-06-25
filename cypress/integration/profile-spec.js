@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
 describe('Profile', () => {
-  before(() => cy.registerUserIfNeeded())
   beforeEach(() => {
+    cy.registerUserIfNeeded()
     cy.login()
   })
 

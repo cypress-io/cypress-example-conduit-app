@@ -16,6 +16,7 @@ workflows:
           post-steps:
             - store_artifacts:
                 path: coverage
+            - run: npx nyc report --reporter=text
             # send code coverage to coveralls.io
             # https://coveralls.io/github/bahmutov/realworld
             - run: npm run coveralls

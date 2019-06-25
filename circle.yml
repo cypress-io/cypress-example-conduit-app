@@ -1,3 +1,4 @@
+# see orb options at
 # https://github.com/cypress-io/circleci-orb
 version: 2.1
 orbs:
@@ -9,6 +10,9 @@ workflows:
           pre-steps:
             - run: npm config set unsafe-perm true
           executor: cypress/base-10
-          start: ls -r node_modules/sqlite3/lib/binding && npm start
-          wait-on: http://localhost:4100
           no-workspace: true
+          start: npm run start:coverage
+          wait-on: http://localhost:4100
+          post-steps:
+            - store_artifacts:
+                path: coverage

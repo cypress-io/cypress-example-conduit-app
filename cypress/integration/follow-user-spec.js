@@ -26,9 +26,17 @@ describe('following user', () => {
     cy.get('[data-cy=article]').type('this post is **important**.')
     cy.get('[data-cy=tags]').type('test{enter}')
     cy.get('[data-cy=publish]').click()
+    // wait for the article to be published
+    // otherwise if we just click on the profile link right away
+    // we might load profile - THEN immediately load the article
+    // because we clicked on it first
+    cy.location('pathname').should('equal', '/article/my-title')
+
     // log out
     cy.contains('[data-cy=profile]', secondUser.username).click()
-    cy.get('[data-cy="edit-profile-settings"]').click()
+    cy.get('[data-cy="edit-profile-settings"]')
+      .should('be.visible')
+      .click()
     cy.get('[data-cy=logout]').click()
     cy.get('[data-cy=sign-in]').should('be.visible')
     // login as our test user

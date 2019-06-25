@@ -39,9 +39,16 @@ module.exports = (on, config) => {
             err.toString().includes('no such table')
               ? undefined
               : Promise.reject(err)
-          ),,
+          ),
         knex
           .truncate('Comments')
+          .catch(err =>
+            err.toString().includes('no such table')
+              ? undefined
+              : Promise.reject(err)
+          ),
+        knex
+          .truncate('Followers')
           .catch(err =>
             err.toString().includes('no such table')
               ? undefined

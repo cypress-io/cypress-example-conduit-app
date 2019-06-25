@@ -160,6 +160,7 @@ class Settings extends React.Component {
               <hr />
 
               <button
+                data-cy='logout'
                 className='btn btn-outline-danger'
                 onClick={this.props.onClickLogout}
               >

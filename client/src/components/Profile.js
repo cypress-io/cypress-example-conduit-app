@@ -47,7 +47,11 @@ const FollowUserButton = props => {
   }
 
   return (
-    <button className={classes} onClick={handleClick}>
+    <button
+      data-cy='follow-unfollow-user'
+      className={classes}
+      onClick={handleClick}
+    >
       <i className='ion-plus-round' />
       &nbsp;
       {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}

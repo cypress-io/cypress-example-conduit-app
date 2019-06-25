@@ -130,7 +130,7 @@ class Profile extends React.Component {
 
     return (
       <div className='profile-page'>
-        <div className='user-info'>
+        <div className='user-info' data-cy='user-info'>
           <div className='container'>
             <div className='row'>
               <div className='col-xs-12 col-md-10 offset-md-1'>
@@ -139,8 +139,8 @@ class Profile extends React.Component {
                   className='user-img'
                   alt={profile.username}
                 />
-                <h4>{profile.username}</h4>
-                <p>{profile.bio}</p>
+                <h4 data-cy='username'>{profile.username}</h4>
+                <p data-cy='bio'>{profile.bio}</p>
 
                 <EditProfileSettings isUser={isUser} />
                 <FollowUserButton

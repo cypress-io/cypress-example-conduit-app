@@ -53,8 +53,11 @@ describe('following user', () => {
         expect(c.text()).to.include('Follow seconduser')
       })
       .click()
-    cy.get('[data-cy=follow-unfollow-user]').should(c => {
-      expect(c.text()).to.include('Unfollow seconduser')
-    })
+    // unfollow user
+    cy.get('[data-cy=follow-unfollow-user]')
+      .should(c => {
+        expect(c.text()).to.include('Unfollow seconduser')
+      })
+      .click()
   })
 })

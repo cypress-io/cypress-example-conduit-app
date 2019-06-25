@@ -14,6 +14,7 @@
   },
   "scripts": {
     "start": "node server",
+    "start:coverage": "../node_modules/.bin/nyc --silent node server",
     "test": "lab -a code -I '__core-js_shared__' -L",
     "lint": "eslint ."
   },

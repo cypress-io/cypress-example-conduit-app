@@ -10,13 +10,16 @@
     "ci:server": "cd server && npm ci",
     "build": "cd client && npm run build",
     "start": "concurrently npm:start:client npm:start:server",
+    "start:coverage": "concurrently npm:start:client npm:start:server:coverage",
     "start:client": "cd client && npm start",
     "start:server": "cd server && npm start",
+    "start:server:coverage": "cd server && npm run start:coverage",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:test": "cypress run -s 'cypress/integration/**/*-spec.js'",
     "test": "start-test start 4100 cypress:test",
     "dev": "start-test start 4100 cypress:open",
+    "dev:coverage": "start-test start:coverage 4100 cypress:open",
     "cp:sqlite3": "cp -r node_sqlite3/node-v57-darwin-x64 node_modules/sqlite3/lib/binding && cp -r node_sqlite3/node-v57-linux-x64 node_modules/sqlite3/lib/binding"
   },
   "repository": {
@@ -31,7 +34,7 @@
   },
   "homepage": "https://github.com/bahmutov/realworld#readme",
   "devDependencies": {
-    "@cypress/code-coverage": "cypress-io/code-coverage#9dbdd83",
+    "@cypress/code-coverage": "1.5.0",
     "babel-plugin-istanbul": "5.1.4",
     "common-tags": "1.8.0",
     "concurrently": "4.1.0",

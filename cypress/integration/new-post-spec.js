@@ -35,6 +35,11 @@ describe('New post', () => {
     cy.get('[data-cy=article]').type('this post is **important**.')
     cy.get('[data-cy=tags]').type('test{enter}')
     cy.get('[data-cy=publish]').click()
+    // wait for the article to be published
+    // otherwise if we just click on the profile link right away
+    // we might load profile - THEN immediately load the article
+    // because we clicked on it first
+    cy.location('pathname').should('equal', '/article/my-title')
 
     cy.get('[data-cy=home]').click()
     cy.get('[data-cy=global-feed]').click()
@@ -59,6 +64,11 @@ describe('New post', () => {
     cy.get('[data-cy=article]').type('this post is **important**.')
     cy.get('[data-cy=tags]').type('test{enter}')
     cy.get('[data-cy=publish]').click()
+    // wait for the article to be published
+    // otherwise if we just click on the profile link right away
+    // we might load profile - THEN immediately load the article
+    // because we clicked on it first
+    cy.location('pathname').should('equal', '/article/my-title')
 
     cy.get('[data-cy=comment-text]').type('great post 👍')
     cy.get('[data-cy=post-comment]').click()

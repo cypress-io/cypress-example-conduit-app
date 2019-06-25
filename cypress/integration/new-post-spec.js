@@ -26,6 +26,26 @@ describe('New post', () => {
     cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
   })
 
+  it('deletes comment', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+    cy.get('[data-cy=article]').type('this post is **important**.')
+    cy.get('[data-cy=tags]').type('test{enter}')
+    cy.get('[data-cy=publish]').click()
+
+    cy.get('[data-cy=comment-text]').type('great post 👍')
+    cy.get('[data-cy=post-comment]').click()
+
+    cy.contains('[data-cy=comment]', 'great post 👍')
+      .should('be.visible')
+      .find('[data-cy=delete-button]')
+      .click()
+    cy.contains('[data-cy=comment]', 'great post 👍').should('not.exist')
+  })
+
   it('sets tags', () => {
     cy.contains('a.nav-link', 'New Post').click()
 
@@ -118,5 +138,37 @@ describe('New post', () => {
         const sortedTags = firstPost.tagList.sort()
         expect(sortedTags).to.deep.equal(tags.sort())
       })
+  })
+
+  it('deletes post', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // instead hard-coding text in this test
+    // the blog post contents comes from cypress/fixtures/post.js
+    cy.get('[data-cy=title]').type(title)
+    cy.get('[data-cy=about]').type(about)
+
+    // dispatch Redux actions
+    cy.window()
+      .its('store')
+      .invoke('dispatch', {
+        type: 'UPDATE_FIELD_EDITOR',
+        key: 'body',
+        value: article
+      })
+
+    // need to click "Enter" after each tag
+    cy.get('[data-cy=tags]').type(tags.join('{enter}') + '{enter}')
+
+    // and post the new article
+    cy.get('[data-cy=publish]').click()
+
+    // the url should show the new article
+    cy.url().should('include', '/article/' + Cypress._.kebabCase(title))
+
+    cy.get('[data-cy=delete-article]').click()
+
+    // goes back to the main page
+    cy.location('pathname').should('equal', '/')
   })
 })

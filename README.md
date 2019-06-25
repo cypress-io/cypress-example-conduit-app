@@ -1,4 +1,4 @@
-# realworld [![renovate-app badge][renovate-badge]][renovate-app] [![CircleCI](https://circleci.com/gh/bahmutov/realworld/tree/master.svg?style=svg)](https://circleci.com/gh/bahmutov/realworld/tree/master)
+# realworld [![renovate-app badge][renovate-badge]][renovate-app] [![CircleCI](https://circleci.com/gh/bahmutov/realworld/tree/master.svg?style=svg)](https://circleci.com/gh/bahmutov/realworld/tree/master) [![Coverage Status](https://coveralls.io/repos/github/bahmutov/realworld/badge.svg)](https://coveralls.io/github/bahmutov/realworld)
 
 Fork of [applitools/cypress-applitools-webinar](https://github.com/applitools/cypress-applitools-webinar) which is a fork of [gothinkster/realworld](https://github.com/gothinkster/realworld).
 

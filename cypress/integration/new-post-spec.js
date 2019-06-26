@@ -4,9 +4,9 @@ import { title, about, article, tags } from '../fixtures/post'
 import { stripIndent } from 'common-tags'
 
 describe('New post', () => {
-  before(() => cy.registerUserIfNeeded())
   beforeEach(() => {
-    cy.task('deleteAllArticles')
+    cy.task('cleanDatabase')
+    cy.registerUserIfNeeded()
     cy.login()
   })
 
@@ -24,6 +24,83 @@ describe('New post', () => {
     cy.get('[data-cy=post-comment]').click()
 
     cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+  })
+
+  it('can edit an article', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+    cy.get('[data-cy=article]').type('this post is **important**.')
+    cy.get('[data-cy=tags]').type('test{enter}')
+    cy.get('[data-cy=publish]').click()
+    cy.location('pathname').should('equal', '/article/my-title')
+
+    cy.get('[data-cy=edit-article]').click()
+    cy.location('pathname').should('equal', '/editor/my-title')
+    cy.get('[data-cy=title]')
+      .clear()
+      .type('a brand new title')
+    cy.get('[data-cy=publish]').click()
+    cy.location('pathname').should('equal', '/article/a-brand-new-title')
+  })
+
+  it('can fav and unfav an article', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+    cy.get('[data-cy=article]').type('this post is **important**.')
+    cy.get('[data-cy=tags]').type('test{enter}')
+    cy.get('[data-cy=publish]').click()
+    // wait for the article to be published
+    // otherwise if we just click on the profile link right away
+    // we might load profile - THEN immediately load the article
+    // because we clicked on it first
+    cy.location('pathname').should('equal', '/article/my-title')
+
+    cy.get('[data-cy=home]').click()
+    cy.get('[data-cy=global-feed]').click()
+    cy.get('.article-preview')
+      .should('have.length', 1)
+      .first()
+      .find('[data-cy=fav-article]')
+      .click()
+
+    // now go to my profile and see this article
+    cy.get('[data-cy=profile]').click()
+    cy.location('pathname').should('equal', '/@testuser')
+    cy.contains('.article-preview', 'my title')
+      // now unfav article
+      .find('[data-cy=fav-article]')
+      .click()
+  })
+
+  it('deletes comment', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // I have added "data-cy" attributes to select input fields
+    cy.get('[data-cy=title]').type('my title')
+    cy.get('[data-cy=about]').type('about X')
+    cy.get('[data-cy=article]').type('this post is **important**.')
+    cy.get('[data-cy=tags]').type('test{enter}')
+    cy.get('[data-cy=publish]').click()
+    // wait for the article to be published
+    // otherwise if we just click on the profile link right away
+    // we might load profile - THEN immediately load the article
+    // because we clicked on it first
+    cy.location('pathname').should('equal', '/article/my-title')
+
+    cy.get('[data-cy=comment-text]').type('great post 👍')
+    cy.get('[data-cy=post-comment]').click()
+
+    cy.contains('[data-cy=comment]', 'great post 👍')
+      .should('be.visible')
+      .find('[data-cy=delete-button]')
+      .click()
+    cy.contains('[data-cy=comment]', 'great post 👍').should('not.exist')
   })
 
   it('sets tags', () => {
@@ -118,5 +195,37 @@ describe('New post', () => {
         const sortedTags = firstPost.tagList.sort()
         expect(sortedTags).to.deep.equal(tags.sort())
       })
+  })
+
+  it('deletes post', () => {
+    cy.contains('a.nav-link', 'New Post').click()
+
+    // instead hard-coding text in this test
+    // the blog post contents comes from cypress/fixtures/post.js
+    cy.get('[data-cy=title]').type(title)
+    cy.get('[data-cy=about]').type(about)
+
+    // dispatch Redux actions
+    cy.window()
+      .its('store')
+      .invoke('dispatch', {
+        type: 'UPDATE_FIELD_EDITOR',
+        key: 'body',
+        value: article
+      })
+
+    // need to click "Enter" after each tag
+    cy.get('[data-cy=tags]').type(tags.join('{enter}') + '{enter}')
+
+    // and post the new article
+    cy.get('[data-cy=publish]').click()
+
+    // the url should show the new article
+    cy.url().should('include', '/article/' + Cypress._.kebabCase(title))
+
+    cy.get('[data-cy=delete-article]').click()
+
+    // goes back to the main page
+    cy.location('pathname').should('equal', '/')
   })
 })

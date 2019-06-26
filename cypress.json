@@ -5,6 +5,9 @@
     "user": {
       "email": "tester@test.com",
       "password": "password1234"
+    },
+    "codeCoverage": {
+      "url": "http://localhost:3000/__coverage__"
     }
   },
   "viewportHeight": 1000,

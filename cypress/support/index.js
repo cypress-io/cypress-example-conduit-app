@@ -1,12 +1,14 @@
+/// <reference types="cypress" />
 import '@cypress/code-coverage/support'
 
 const apiUrl = Cypress.env('apiUrl')
 
 // a custom Cypress command to login using XHR call
 // and then set the received token in the local storage
-Cypress.Commands.add('login', () => {
+// can log in with default user or with a given one
+Cypress.Commands.add('login', (user = Cypress.env('user')) => {
   cy.request('POST', `${apiUrl}/api/users/login`, {
-    user: Cypress.env('user')
+    user: Cypress._.pick(user, ['email', 'password'])
   })
     .its('body.user.token')
     .should('exist')
@@ -22,17 +24,20 @@ Cypress.Commands.add('login', () => {
 // creates a user with email and password
 // defined in cypress.json environment variables
 // if the user already exists, ignores the error
-Cypress.Commands.add('registerUserIfNeeded', () => {
+// or given user info parameters
+Cypress.Commands.add('registerUserIfNeeded', (options = {}) => {
+  const defaults = {
+    username: 'testuser',
+    image: 'https://robohash.org/6FJ.png?set=set3&size=150x150',
+    // email, password
+    ...Cypress.env('user')
+  }
+  const user = Cypress._.defaults({}, options, defaults)
   cy.request({
     method: 'POST',
     url: `${apiUrl}/api/users`,
     body: {
-      user: {
-        username: 'testuser',
-        image: 'https://robohash.org/6FJ.png?set=set3&size=150x150',
-        // email, password
-        ...Cypress.env('user')
-      }
+      user
     },
     failOnStatusCode: false
   })

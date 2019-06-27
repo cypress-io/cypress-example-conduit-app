@@ -148,6 +148,7 @@ class Editor extends React.Component {
                           <span className='tag-default tag-pill' key={tag}>
                             <i
                               className='ion-close-round'
+                              data-cy='remove-tag'
                               onClick={this.removeTagHandler(tag)}
                             />
                             {tag}

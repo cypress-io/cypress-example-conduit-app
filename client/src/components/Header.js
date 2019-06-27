@@ -38,7 +38,7 @@ const LoggedInView = props => {
           </Link>
         </li>
 
-        <li className='nav-item'>
+        <li className='nav-item' data-cy='new-post'>
           <Link to='/editor' className='nav-link'>
             <i className='ion-compose' />
             &nbsp;New Post

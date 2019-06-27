@@ -44,6 +44,39 @@ describe('New post', () => {
       })
   })
 
+  it('removes a tag', () => {
+    cy.get('[data-cy=new-post]').click()
+    cy.location('pathname').should('equal', '/editor')
+
+    // separate Redux actions for each field
+    cy.dispatch({
+      type: 'UPDATE_FIELD_EDITOR',
+      key: 'title',
+      value: 'first post'
+    })
+
+    cy.dispatch({
+      type: 'UPDATE_FIELD_EDITOR',
+      key: 'description',
+      value: 'this is just the beginning'
+    })
+
+    cy.dispatch({
+      type: 'UPDATE_FIELD_EDITOR',
+      key: 'body',
+      value: 'something **important**'
+    })
+
+    cy.get('[data-cy=tags]').type('first{enter}testing{enter}')
+    cy.get('.tag-pill')
+      .should('have.length', 2)
+      // now delete a tag
+      .first()
+      .find('[data-cy=remove-tag]')
+      .click()
+    cy.get('.tag-pill').should('have.length', 1)
+  })
+
   it('filters articles by tag', () => {
     // note the tags for two posts:
     // they each have an own tag

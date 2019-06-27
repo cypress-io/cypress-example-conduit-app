@@ -62,7 +62,7 @@ module.exports = (on, config) => {
               : Promise.reject(err)
           ),
         knex
-          .truncate('Favorites')
+          .truncate('ArticleFavorites')
           .catch(err =>
             err.toString().includes('no such table')
               ? undefined

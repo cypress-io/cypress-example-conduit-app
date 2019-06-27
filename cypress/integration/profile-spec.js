@@ -10,7 +10,15 @@ describe('Profile', () => {
   it('shows my profile', () => {
     cy.get('[data-cy=profile]').click()
     cy.location('pathname').should('equal', '/@testuser')
-    cy.get('[data-cy="edit-profile-settings"]').click()
+    cy.get('[data-cy=edit-profile-settings]').click()
+  })
+
+  it('logs out via profile', () => {
+    cy.get('[data-cy=profile]').click()
+    cy.location('pathname').should('equal', '/@testuser')
+    cy.get('[data-cy=edit-profile-settings]').click()
+    cy.get('[data-cy=logout]').click()
+    cy.get('[data-cy=sign-in]').should('be.visible')
   })
 
   it('can update my profile', () => {

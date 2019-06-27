@@ -8,6 +8,10 @@ import { ConnectedRouter } from 'react-router-redux'
 
 import App from './components/App'
 
+// we always will hit "IF" branch during Cypress tests
+// so we should ignore "ELSE" branch for code coverage purposes
+// https://github.com/gotwarlost/istanbul/blob/master/ignoring-code-for-coverage.md
+/* istanbul ignore else */
 if (window.Cypress) {
   window.store = store
 }

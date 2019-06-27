@@ -14,6 +14,7 @@ The tests are in [cypress/integration](cypress/integration) folder
 - [new-post-spec.js](cypress/integration/new-post-spec.js) verifies that a new article can be published and updated
 - [profile-spec.js](cypress/integration/profile-spec.js) lets the user edit their profile
 - [register-spec.js](cypress/integration/register-spec.js) tests if a new user can register
+- [tags-spec.js](cypress/integration/tags-spec.js) checks if tags work
 
 ## Full code coverage
 

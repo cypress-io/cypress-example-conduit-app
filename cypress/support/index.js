@@ -42,3 +42,57 @@ Cypress.Commands.add('registerUserIfNeeded', (options = {}) => {
     failOnStatusCode: false
   })
 })
+
+/**
+ * Dispatches a given Redux action straight to the application
+ */
+Cypress.Commands.add('dispatch', action => {
+  expect(action)
+    .to.be.an('object')
+    .and.to.have.property('type')
+  cy.window()
+    .its('store')
+    .invoke('dispatch', action)
+})
+
+/**
+ * Single command to write a post
+ */
+Cypress.Commands.add('article', fields => {
+  expect(fields)
+    .to.be.an('object')
+    .and.to.have.all.keys(['title', 'description', 'body', 'tags'])
+
+  // can we create an article using `cy.task`?
+
+  // TODO use data-cy for new post link
+  cy.contains('a.nav-link', 'New Post').click()
+  cy.location('pathname').should('equal', '/editor')
+
+  // separate Redux actions for each field
+  cy.dispatch({
+    type: 'UPDATE_FIELD_EDITOR',
+    key: 'title',
+    value: fields.title
+  })
+
+  cy.dispatch({
+    type: 'UPDATE_FIELD_EDITOR',
+    key: 'description',
+    value: fields.description
+  })
+
+  cy.dispatch({
+    type: 'UPDATE_FIELD_EDITOR',
+    key: 'body',
+    value: fields.body
+  })
+
+  if (fields.tags.length) {
+    cy.get('[data-cy=tags]').type(fields.tags.join('{enter}') + '{enter}')
+    cy.get('.tag-pill').should('have.length', fields.tags.length)
+  }
+  cy.get('[data-cy=publish]').click()
+
+  cy.location('pathname').should('not.equal', '/editor')
+})

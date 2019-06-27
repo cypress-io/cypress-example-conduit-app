@@ -12,7 +12,7 @@ const YourFeedTab = props => {
     }
 
     return (
-      <li className='nav-item'>
+      <li className='nav-item' data-cy='your-feed'>
         <a
           href=''
           className={props.tab === 'feed' ? 'nav-link active' : 'nav-link'}
@@ -50,7 +50,7 @@ const TagFilterTab = props => {
   }
 
   return (
-    <li className='nav-item'>
+    <li className='nav-item' data-cy='tag-feed'>
       <a href='' className='nav-link active'>
         <i className='ion-pound' /> {props.tag}
       </a>

@@ -7,7 +7,7 @@ describe('New post', () => {
     cy.login()
   })
 
-  it.only('tags article', () => {
+  it('tags article', () => {
     // TODO use data-cy for new post link
     cy.contains('a.nav-link', 'New Post').click()
     cy.location('pathname').should('equal', '/editor')

@@ -16,6 +16,7 @@ The tests are in [cypress/integration](cypress/integration) folder
 - [register-spec.js](cypress/integration/register-spec.js) tests if a new user can register
 - [tags-spec.js](cypress/integration/tags-spec.js) checks if tags work
 - [pagination-spec.js](cypress/integration/pagination-spec.js) creates many articles via API calls and then checks if they are displayed across two pages
+- [force-logout-spec.js](cypress/integration/force-logout-spec.js) verifies that unauthorized API calls force the user session to finish
 
 ## Full code coverage
 

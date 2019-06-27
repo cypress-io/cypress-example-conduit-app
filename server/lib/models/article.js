@@ -106,6 +106,6 @@ module.exports = class Article extends Model {
       .resultSize()
 
     this.slug = exists ? `${slug}-${RandomString.generate(6)}` : slug
-    console.log('set this slug', this.slug)
+    // console.log('set this slug', this.slug)
   }
 }

@@ -228,4 +228,13 @@ describe('New post', () => {
     // goes back to the main page
     cy.location('pathname').should('equal', '/')
   })
+
+  it('creates article using API', () => {
+    cy.postArticle({
+      title: 'first post',
+      description: 'first description',
+      body: 'first article',
+      tagList: ['first', 'testing']
+    })
+  })
 })

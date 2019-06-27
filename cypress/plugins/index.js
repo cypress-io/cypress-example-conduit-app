@@ -60,6 +60,13 @@ module.exports = (on, config) => {
             err.toString().includes('no such table')
               ? undefined
               : Promise.reject(err)
+          ),
+        knex
+          .truncate('Favorites')
+          .catch(err =>
+            err.toString().includes('no such table')
+              ? undefined
+              : Promise.reject(err)
           )
       ])
     },

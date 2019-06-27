@@ -37,7 +37,7 @@ describe('Profile', () => {
       title: 'first post',
       description: 'first description',
       body: 'first article',
-      tags: ['first', 'testing']
+      tagList: ['first', 'testing']
     })
 
     cy.location('pathname').should('equal', '/article/first-post')

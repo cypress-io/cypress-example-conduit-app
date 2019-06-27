@@ -56,12 +56,19 @@ Cypress.Commands.add('dispatch', action => {
 })
 
 /**
- * Single command to write a post
+ * Checks if the given object have all the keys for creating a new article
  */
-Cypress.Commands.add('article', fields => {
+const checkArticle = fields => {
   expect(fields)
     .to.be.an('object')
-    .and.to.have.all.keys(['title', 'description', 'body', 'tags'])
+    .and.to.have.all.keys(['title', 'description', 'body', 'tagList'])
+}
+
+/**
+ * Single command to write a post via UI (with a few Redux shortcuts)
+ */
+Cypress.Commands.add('article', fields => {
+  checkArticle(fields)
 
   // can we create an article using `cy.task`?
 
@@ -88,11 +95,28 @@ Cypress.Commands.add('article', fields => {
     value: fields.body
   })
 
-  if (fields.tags.length) {
-    cy.get('[data-cy=tags]').type(fields.tags.join('{enter}') + '{enter}')
-    cy.get('.tag-pill').should('have.length', fields.tags.length)
+  if (fields.tagList.length) {
+    cy.get('[data-cy=tags]').type(fields.tagList.join('{enter}') + '{enter}')
+    cy.get('.tag-pill').should('have.length', fields.tagList.length)
   }
   cy.get('[data-cy=publish]').click()
 
   cy.location('pathname').should('not.equal', '/editor')
+})
+
+Cypress.Commands.add('postArticle', fields => {
+  checkArticle(fields)
+  const jwt = localStorage.getItem('jwt')
+  expect(jwt, 'jwt token').to.be.a('string')
+
+  cy.request({
+    method: 'POST',
+    url: `${apiUrl}/api/articles`,
+    body: {
+      article: fields
+    },
+    headers: {
+      authorization: `Token ${jwt}`
+    }
+  })
 })

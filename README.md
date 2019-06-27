@@ -15,6 +15,7 @@ The tests are in [cypress/integration](cypress/integration) folder
 - [profile-spec.js](cypress/integration/profile-spec.js) lets the user edit their profile
 - [register-spec.js](cypress/integration/register-spec.js) tests if a new user can register
 - [tags-spec.js](cypress/integration/tags-spec.js) checks if tags work
+- [pagination-spec.js](cypress/integration/pagination-spec.js) creates many articles via API calls and then checks if they are displayed across two pages
 
 ## Full code coverage
 

@@ -7,7 +7,7 @@ describe('New post', () => {
     cy.login()
   })
 
-  it('tags article', () => {
+  it.only('tags article', () => {
     // TODO use data-cy for new post link
     cy.contains('a.nav-link', 'New Post').click()
     cy.location('pathname').should('equal', '/editor')
@@ -53,7 +53,7 @@ describe('New post', () => {
       title: 'first post',
       description: 'first description',
       body: 'first article',
-      tags: ['first', 'testing']
+      tagList: ['first', 'testing']
     })
 
     cy.location('pathname').should('equal', '/article/first-post')
@@ -62,7 +62,7 @@ describe('New post', () => {
       title: 'second post',
       description: 'second description',
       body: 'second article',
-      tags: ['second', 'testing']
+      tagList: ['second', 'testing']
     })
 
     cy.location('pathname').should('equal', '/article/second-post')

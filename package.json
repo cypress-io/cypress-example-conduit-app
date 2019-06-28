@@ -43,7 +43,7 @@
     "common-tags": "1.8.0",
     "concurrently": "4.1.0",
     "coveralls": "3.0.4",
-    "cypress": "3.3.1",
+    "cypress": "3.3.2",
     "husky": "2.7.0",
     "istanbul-lib-coverage": "2.0.5",
     "knex": "0.17.6",

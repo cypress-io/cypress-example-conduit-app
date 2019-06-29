@@ -41,7 +41,7 @@
     "@cypress/code-coverage": "1.6.1",
     "babel-plugin-istanbul": "5.1.4",
     "common-tags": "1.8.0",
-    "concurrently": "4.1.0",
+    "concurrently": "4.1.1",
     "coveralls": "3.0.4",
     "cypress": "3.3.2",
     "husky": "2.7.0",

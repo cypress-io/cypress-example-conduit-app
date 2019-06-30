@@ -11,7 +11,7 @@
     "@babel/core": "7.4.5",
     "@babel/preset-react": "7.0.0",
     "history": "4.9.0",
-    "marked": "0.6.2",
+    "marked": "0.6.3",
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",

@@ -58,5 +58,8 @@
       "pre-commit": "npm run warn-only",
       "pre-push": "npm run stop-only"
     }
+  },
+  "nyc": {
+    "exclude": "server/lib/migrations"
   }
 }

@@ -70,7 +70,7 @@ workflows:
             - run: cp coverage/coverage-final.json coverage-part/coverage-$CIRCLE_NODE_INDEX.json || true
             - run: ls -la coverage-part
             - persist_to_workspace:
-                root: coverage
+                root: coverage-part
                 paths:
                   - "*"
 

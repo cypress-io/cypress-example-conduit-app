@@ -10,6 +10,8 @@ jobs:
     steps:
       - attach_workspace:
           at: /
+      - run: ls -la /
+      - run: ls -la /tmp
       - run: ls -la /tmp/coverage
       - run: mkdir .nyc_output || true
       - run: npx nyc merge /tmp/coverage
@@ -50,6 +52,7 @@ workflows:
             - run: mkdir /tmp/coverage || true
             - run: touch /tmp/coverage/.placeholder || true
             - run: cp coverage/coverage-final.json /tmp/coverage/coverage-$CIRCLE_NODE_INDEX.json || true
+            - run: ls -la /tmp/coverage
             - persist_to_workspace:
                 root: /tmp
                 paths:

@@ -70,9 +70,9 @@ workflows:
             - run: cp coverage/coverage-final.json coverage-part/coverage-$CIRCLE_NODE_INDEX.json || true
             - run: ls -la coverage-part
             - persist_to_workspace:
-                root: coverage-part
+                root: ~/
                 paths:
-                  - "*.json"
+                  - "coverage-part/*"
 
             # send code coverage to coveralls.io
             # https://coveralls.io/github/cypress-io/cypress-example-realworld

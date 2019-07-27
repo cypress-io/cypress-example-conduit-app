@@ -15,7 +15,11 @@ jobs:
       - run: mkdir .nyc_output || true
       - run: npx nyc merge /coverage
       - run: mv coverage.json .nyc_output/out.json
+      - run: ls -la .
+      - run: cat .nyc_output/out.json
       - run: npx nyc report --reporter lcov --report-dir coverage
+      - store_artifacts:
+          path: coverage
       - run:
           # https://docs.coveralls.io/parallel-build-webhook
           name: Tell Coveralls all jobs are done

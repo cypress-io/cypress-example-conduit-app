@@ -8,6 +8,7 @@ jobs:
   notify_coveralls:
     executor: cypress/base-10
     steps:
+      - run: ls -la /tmp/coverage
       - run:
           # https://docs.coveralls.io/parallel-build-webhook
           name: Tell Coveralls all jobs are done
@@ -38,6 +39,13 @@ workflows:
             # if this machine had no tests to run
             # there will be no coverage report
             - run: npx nyc report --reporter=text || true
+
+            - run: cp coverage/coverage-final.json /tmp/coverage/coverage-$CIRCLE_NODE_INDEX.json || true
+            - persist_to_workspace:
+                root: /tmp/coverage
+                paths:
+                  - coverage-$CIRCLE_NODE_INDEX.json
+
             # send code coverage to coveralls.io
             # https://coveralls.io/github/cypress-io/cypress-example-realworld
             # but because we run tests in parallel, tell Coveralls

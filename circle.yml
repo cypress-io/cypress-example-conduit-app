@@ -13,6 +13,7 @@ workflows:
           no-workspace: true
           start: npm run start:coverage
           wait-on: http://localhost:4100
+          record: true
           post-steps:
             - store_artifacts:
                 path: coverage

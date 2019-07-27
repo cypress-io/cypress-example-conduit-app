@@ -4,6 +4,9 @@
   "description": "Fork of realworld app to show full e2e code coverage",
   "private": true,
   "main": "index.js",
+  "engines": {
+    "node": "10"
+  },
   "scripts": {
     "postinstall": "run-s ci:client ci:server cp:sqlite3",
     "ci:client": "cd client && npm ci",

@@ -46,8 +46,7 @@ workflows:
             - run:
                 environment:
                   COVERALLS_PARALLEL: 1
-                  CIRCLE_BUILD_NUM: $CIRCLE_WORKFLOW_ID
-                command: npm run coveralls || true
+                command: CIRCLE_BUILD_NUM=$CIRCLE_WORKFLOW_ID npm run coveralls || true
       - notify_coveralls:
           requires:
             - cypress/run

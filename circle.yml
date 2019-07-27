@@ -45,9 +45,9 @@ workflows:
             # https://docs.coveralls.io/parallel-build-webhook
             - run:
                 environment:
-                  COVERALLS_PARALLEL=1
+                  COVERALLS_PARALLEL: 1
                   # CIRCLE_BUILD_NUM=$CIRCLE_WORKFLOW_ID
-                  COVERALLS_SERVICE_JOB_ID=$CIRCLE_WORKFLOW_ID
+                  COVERALLS_SERVICE_JOB_ID: $CIRCLE_WORKFLOW_ID
                 command: npm run coveralls --verbose || true
       - notify_coveralls:
           requires:

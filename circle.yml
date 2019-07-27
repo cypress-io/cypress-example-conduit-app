@@ -44,9 +44,9 @@ workflows:
             - run: mkdir /tmp/coverage || true
             - run: cp coverage/coverage-final.json /tmp/coverage/coverage-$CIRCLE_NODE_INDEX.json || true
             - persist_to_workspace:
-                root: /tmp/coverage
+                root: /tmp
                 paths:
-                  - coverage-$CIRCLE_NODE_INDEX.json
+                  - coverage/*
 
             # send code coverage to coveralls.io
             # https://coveralls.io/github/cypress-io/cypress-example-realworld

@@ -23,15 +23,15 @@ jobs:
             npx nyc report \
               --reporter lcov --reporter text-summary \
               --report-dir coverage
-          working_directory: project
+          working_directory: /project
       - store_artifacts:
-          path: project/coverage
+          path: /project/coverage
 
       # send code coverage to coveralls.io
       # https://coveralls.io/github/cypress-io/cypress-example-realworld
       - run:
           command: npm run coveralls || true
-          working_directory: project
+          working_directory: /project
 
       # - run:
       #     # https://docs.coveralls.io/parallel-build-webhook

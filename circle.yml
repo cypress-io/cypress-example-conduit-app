@@ -72,7 +72,7 @@ workflows:
             - persist_to_workspace:
                 root: coverage-part
                 paths:
-                  - "*"
+                  - "*.json"
 
             # send code coverage to coveralls.io
             # https://coveralls.io/github/cypress-io/cypress-example-realworld

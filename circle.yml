@@ -23,7 +23,9 @@ workflows:
           post-steps:
             - store_artifacts:
                 path: coverage
-            - run: npx nyc report --reporter=text
+            # if this machine had no tests to run
+            # there will be no coverage report
+            - run: npx nyc report --reporter=text || true
             # send code coverage to coveralls.io
             # https://coveralls.io/github/bahmutov/realworld
-            - run: npm run coveralls
+            - run: npm run coveralls || true

@@ -6,9 +6,12 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/run:
+      - cypress/install:
           pre-steps:
             - run: npm config set unsafe-perm true
+      - cypress/run:
+          requires:
+            - cypress/install
           executor: cypress/base-10
           no-workspace: true
           start: npm run start:coverage

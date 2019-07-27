@@ -27,5 +27,8 @@ workflows:
             # there will be no coverage report
             - run: npx nyc report --reporter=text || true
             # send code coverage to coveralls.io
-            # https://coveralls.io/github/bahmutov/realworld
-            - run: npm run coveralls || true
+            # https://coveralls.io/github/cypress-io/cypress-example-realworld
+            # but because we run tests in parallel, tell Coveralls
+            # to merge the reports into a single complete one
+            # https://docs.coveralls.io/parallel-build-webhook
+            - run: COVERALLS_PARALLEL=1 npm run coveralls || true

@@ -15,7 +15,7 @@ jobs:
       - run: mkdir /project/.nyc_output || true
       - run: npx nyc merge /coverage
       - run: mv coverage.json /project/.nyc_output/out.json
-      - run: ls -la project
+      - run: ls -la /project
       # - run: cat .nyc_output/out.json
       - run:
           name: generate coverage report

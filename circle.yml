@@ -8,7 +8,13 @@ jobs:
   notify_coveralls:
     executor: cypress/base-10
     steps:
+      - attach_workspace:
+          at: /tmp/coverage
       - run: ls -la /tmp/coverage
+      - run: mkdir .nyc_output || true
+      - run: npx nyc merge reports
+      - run: mv coverage.json .nyc_output/out.json
+      - run: npx nyc report --reporter lcov --report-dir coverage
       - run:
           # https://docs.coveralls.io/parallel-build-webhook
           name: Tell Coveralls all jobs are done

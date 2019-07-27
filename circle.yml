@@ -7,12 +7,15 @@ workflows:
   build:
     jobs:
       - cypress/install:
+          executor: cypress/base-10
           pre-steps:
             - run: npm config set unsafe-perm true
       - cypress/run:
           requires:
             - cypress/install
           executor: cypress/base-10
+          parallel: true
+          parallelism: 4
           no-workspace: true
           start: npm run start:coverage
           wait-on: http://localhost:4100

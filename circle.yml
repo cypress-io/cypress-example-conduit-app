@@ -11,7 +11,8 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: ls -la /
-      - run: ls -la coverage-part
+      - run: ls -la .
+      - run: ls -la coverage-part || true
       - run: mkdir .nyc_output || true
       - run: npx nyc merge coverage-part
       - run: mv coverage.json .nyc_output/out.json
@@ -69,9 +70,9 @@ workflows:
             - run: cp coverage/coverage-final.json coverage-part/coverage-$CIRCLE_NODE_INDEX.json || true
             - run: ls -la coverage-part
             - persist_to_workspace:
-                root: coverage-part
+                root: .
                 paths:
-                  - ./*
+                  - coverage-part
 
             # send code coverage to coveralls.io
             # https://coveralls.io/github/cypress-io/cypress-example-realworld

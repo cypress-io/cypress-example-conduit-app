@@ -11,10 +11,9 @@ jobs:
       - attach_workspace:
           at: /
       - run: ls -la /
-      - run: ls -la /tmp
-      - run: ls -la /tmp/coverage
+      - run: ls -la /coverage
       - run: mkdir .nyc_output || true
-      - run: npx nyc merge /tmp/coverage
+      - run: npx nyc merge /coverage
       - run: mv coverage.json .nyc_output/out.json
       - run: npx nyc report --reporter lcov --report-dir coverage
       - run:

@@ -12,29 +12,26 @@ jobs:
           at: ~/
       - run: ls -la /
       - run: ls -la /tmp
-      - run: ls -la /coverage
-      - run: mkdir /project/.nyc_output || true
-      - run: npx nyc merge /coverage
-      - run: mv coverage.json /project/.nyc_output/out.json
-      - run: ls -la /project/.nyc_output
-      - run: ls -la /project
+      - run: ls -la coverage
+      - run: mkdir .nyc_output || true
+      - run: npx nyc merge coverage
+      - run: mv coverage.json .nyc_output/out.json
+      - run: ls -la .nyc_output
       - store_artifacts:
-          path: /project/.nyc_output/out.json
+          path: .nyc_output/out.json
       - run:
           name: generate coverage report
           command: |
             npx nyc report \
               --reporter lcov --reporter text-summary \
               --report-dir coverage
-          working_directory: /project
       - store_artifacts:
-          path: /project/coverage
+          path: coverage
 
       # send code coverage to coveralls.io
       # https://coveralls.io/github/cypress-io/cypress-example-realworld
       - run:
           command: npm run coveralls || true
-          working_directory: /project
 
       # - run:
       #     # https://docs.coveralls.io/parallel-build-webhook

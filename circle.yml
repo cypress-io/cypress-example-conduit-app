@@ -11,10 +11,9 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: ls -la /
-      - run: ls -la /tmp
-      - run: ls -la coverage
+      - run: ls -la coverage-part
       - run: mkdir .nyc_output || true
-      - run: npx nyc merge coverage
+      - run: npx nyc merge coverage-part
       - run: mv coverage.json .nyc_output/out.json
       - run: ls -la .nyc_output
       - store_artifacts:
@@ -65,14 +64,14 @@ workflows:
             - run: npx nyc report --reporter=text || true
 
             # collect all code coverage reports
-            - run: mkdir /tmp/coverage || true
-            - run: touch /tmp/coverage/.placeholder || true
-            - run: cp coverage/coverage-final.json /tmp/coverage/coverage-$CIRCLE_NODE_INDEX.json || true
-            - run: ls -la /tmp/coverage
+            - run: mkdir coverage-part || true
+            - run: touch coverage-part/.placeholder || true
+            - run: cp coverage/coverage-final.json coverage-part/coverage-$CIRCLE_NODE_INDEX.json || true
+            - run: ls -la coverage-part
             - persist_to_workspace:
-                root: /tmp
+                root: coverage-part
                 paths:
-                  - coverage/*
+                  - *
 
             # send code coverage to coveralls.io
             # https://coveralls.io/github/cypress-io/cypress-example-realworld

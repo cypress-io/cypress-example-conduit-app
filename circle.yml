@@ -42,6 +42,7 @@ workflows:
 
             # collect all code coverage reports
             - run: mkdir /tmp/coverage || true
+            - run: touch /tmp/coverage/.placeholder || true
             - run: cp coverage/coverage-final.json /tmp/coverage/coverage-$CIRCLE_NODE_INDEX.json || true
             - persist_to_workspace:
                 root: /tmp

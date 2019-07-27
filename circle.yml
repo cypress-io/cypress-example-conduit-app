@@ -9,8 +9,9 @@ jobs:
     executor: cypress/base-10
     steps:
       - attach_workspace:
-          at: /
+          at: ~/
       - run: ls -la /
+      - run: ls -la /tmp
       - run: ls -la /coverage
       - run: mkdir /project/.nyc_output || true
       - run: npx nyc merge /coverage

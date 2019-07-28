@@ -4,6 +4,22 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
 
+commands:
+  merge-coverage-reports:
+    description: |
+      Merges individual code coverage files using "nyc" tool
+      https://github.com/istanbuljs/nyc.
+      All individual files should be in the folder "coverage-part"
+    steps:
+      - run: ls -la .
+      - run: ls -la coverage-part || true
+      - run: npx nyc merge coverage-part
+      - run: mkdir .nyc_output || true
+      # storing the combined report in ".nyc_output/out.json"
+      # allows other NYC commands to find it right away
+      - run: mv coverage.json .nyc_output/out.json
+      - run: ls -la .nyc_output
+
 jobs:
   merge-coverage:
     description: Merges individual code coverage files and sends combined data to Coveralls.io
@@ -11,12 +27,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: ls -la .
-      - run: ls -la coverage-part || true
-      - run: mkdir .nyc_output || true
-      - run: npx nyc merge coverage-part
-      - run: mv coverage.json .nyc_output/out.json
-      - run: ls -la .nyc_output
+      - merge-coverage-reports
       - run:
           name: generate coverage report
           command: |

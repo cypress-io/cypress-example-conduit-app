@@ -4,7 +4,8 @@
     "apiUrl": "http://localhost:3000",
     "user": {
       "email": "tester@test.com",
-      "password": "password1234"
+      "password": "password1234",
+      "username": "testuser"
     },
     "codeCoverage": {
       "url": "http://localhost:3000/__coverage__"

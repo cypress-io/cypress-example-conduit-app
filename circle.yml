@@ -5,6 +5,29 @@ orbs:
   cypress: cypress-io/cypress@1
 
 commands:
+  save-partial-coverage-report:
+    description: |
+      Saves a single possibly partial coverage report by adding it to the
+      workspace. This way different CircleCI jobs can run parts of the tests
+      and save their results to be merged later.
+    steps:
+      # do not crash if the coverage is not found
+      # because a particular CI job might not have any tests to run
+      # producing no coverage.
+      - run: mkdir coverage-part || true
+      - run: touch coverage-part/.placeholder || true
+      # use unique job id to avoid accidentally overwriting coverage file
+      - run: cp coverage/coverage-final.json \
+          coverage-part/coverage-$CIRCLE_WORKFLOW_JOB_ID.json || true
+      - run: ls -la coverage-part
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            # note that the current folder is "project"
+            # so we need to save the full path correctly
+            # otherwise the files will not be restored in the expected location
+            - "project/coverage-part/*"
+
   merge-coverage-reports:
     description: |
       Merges individual code coverage files using "nyc" tool
@@ -64,16 +87,7 @@ workflows:
             # if this machine had no tests to run
             # there will be no coverage report
             - run: npx nyc report --reporter=text || true
-
-            # collect all code coverage reports
-            - run: mkdir coverage-part || true
-            - run: touch coverage-part/.placeholder || true
-            - run: cp coverage/coverage-final.json coverage-part/coverage-$CIRCLE_NODE_INDEX.json || true
-            - run: ls -la coverage-part
-            - persist_to_workspace:
-                root: ~/
-                paths:
-                  - "project/coverage-part/*"
+            - save-partial-coverage-report
       - merge-coverage:
           requires:
             - cypress/run

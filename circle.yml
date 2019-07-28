@@ -30,7 +30,8 @@ commands:
       - run: mkdir coverage-part || true
       - run: touch coverage-part/.placeholder || true
       # use unique job id to avoid accidentally overwriting coverage file
-      - run: cp <<parameters.coverage-filename>> coverage-part/coverage-<<parameters.label>>-$CIRCLE_WORKFLOW_JOB_ID.json || true
+      # and in case the build is parallel, use node index too
+      - run: cp <<parameters.coverage-filename>> coverage-part/coverage-<<parameters.label>>-$CIRCLE_WORKFLOW_JOB_ID-index-$CIRCLE_NODE_INDEX.json || true
       - run: ls -la coverage-part
       - persist_to_workspace:
           root: ~/

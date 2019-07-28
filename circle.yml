@@ -3,20 +3,66 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
+
+jobs:
+  merge-coverage:
+    description: Merges individual code coverage files and sends combined data to Coveralls.io
+    executor: cypress/base-10
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: ls -la .
+      - run: ls -la coverage-part || true
+      - run: mkdir .nyc_output || true
+      - run: npx nyc merge coverage-part
+      - run: mv coverage.json .nyc_output/out.json
+      - run: ls -la .nyc_output
+      - run:
+          name: generate coverage report
+          command: |
+            npx nyc report \
+              --reporter lcov --reporter text-summary \
+              --report-dir coverage
+      - store_artifacts:
+          path: coverage
+      # send code coverage to coveralls.io
+      # https://coveralls.io/github/cypress-io/cypress-example-realworld
+      - run:
+          command: npm run coveralls || true
+
 workflows:
   build:
     jobs:
-      - cypress/run:
+      - cypress/install:
+          executor: cypress/base-10
           pre-steps:
             - run: npm config set unsafe-perm true
+      - cypress/run:
+          requires:
+            - cypress/install
           executor: cypress/base-10
+          parallel: true
+          parallelism: 4
           no-workspace: true
           start: npm run start:coverage
           wait-on: http://localhost:4100
+          record: true
           post-steps:
             - store_artifacts:
                 path: coverage
-            - run: npx nyc report --reporter=text
-            # send code coverage to coveralls.io
-            # https://coveralls.io/github/bahmutov/realworld
-            - run: npm run coveralls
+            # if this machine had no tests to run
+            # there will be no coverage report
+            - run: npx nyc report --reporter=text || true
+
+            # collect all code coverage reports
+            - run: mkdir coverage-part || true
+            - run: touch coverage-part/.placeholder || true
+            - run: cp coverage/coverage-final.json coverage-part/coverage-$CIRCLE_NODE_INDEX.json || true
+            - run: ls -la coverage-part
+            - persist_to_workspace:
+                root: ~/
+                paths:
+                  - "project/coverage-part/*"
+      - merge-coverage:
+          requires:
+            - cypress/run

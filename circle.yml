@@ -10,6 +10,19 @@ commands:
       Saves a single possibly partial coverage report by adding it to the
       workspace. This way different CircleCI jobs can run parts of the tests
       and save their results to be merged later.
+    parameters:
+      coverage-filename:
+        type: string
+        default: coverage/coverage-final.json
+        description: |
+          Path to the final coverage JSON file produced by "nyc" tool.
+          Typically called "coverage/coverage-final.json"
+      label:
+        type: string
+        default: default
+        description: |
+          Human name for the coverage file. For example, when saving both Cypress
+          and Jest coverage file, use "cypress" and "jest" to have distinct filenames.
     steps:
       # do not crash if the coverage is not found
       # because a particular CI job might not have any tests to run
@@ -17,7 +30,7 @@ commands:
       - run: mkdir coverage-part || true
       - run: touch coverage-part/.placeholder || true
       # use unique job id to avoid accidentally overwriting coverage file
-      - run: cp coverage/coverage-final.json coverage-part/coverage-$CIRCLE_WORKFLOW_JOB_ID.json || true
+      - run: cp <<parameters.coverage-filename>> coverage-part/coverage-<<parameters.label>>-$CIRCLE_WORKFLOW_JOB_ID.json || true
       - run: ls -la coverage-part
       - persist_to_workspace:
           root: ~/
@@ -86,7 +99,8 @@ workflows:
             # if this machine had no tests to run
             # there will be no coverage report
             - run: npx nyc report --reporter=text || true
-            - save-partial-coverage-report
+            - save-partial-coverage-report:
+                label: e2e
       - merge-coverage:
           requires:
             - cypress/run

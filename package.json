@@ -25,7 +25,7 @@
     "dev": "start-test start 4100 cypress:open",
     "dev:coverage": "start-test start:coverage 4100 cypress:open",
     "cp:sqlite3": "cp -r node_sqlite3/node-v57-darwin-x64 node_modules/sqlite3/lib/binding && cp -r node_sqlite3/node-v57-linux-x64 node_modules/sqlite3/lib/binding",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls --verbose",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "warn-only": "stop-only --warn --folder cypress/integration",
     "stop-only": "stop-only --folder cypress/integration"
   },

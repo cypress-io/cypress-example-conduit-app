@@ -17,8 +17,7 @@ commands:
       - run: mkdir coverage-part || true
       - run: touch coverage-part/.placeholder || true
       # use unique job id to avoid accidentally overwriting coverage file
-      - run: cp coverage/coverage-final.json \
-          coverage-part/coverage-$CIRCLE_WORKFLOW_JOB_ID.json || true
+      - run: cp coverage/coverage-final.json coverage-part/coverage-$CIRCLE_WORKFLOW_JOB_ID.json || true
       - run: ls -la coverage-part
       - persist_to_workspace:
           root: ~/

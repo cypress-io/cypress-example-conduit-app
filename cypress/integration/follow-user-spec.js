@@ -1,4 +1,7 @@
-/// <reference types="Cypress" />
+// We use "cy.api" custom command that comes from a plugin.
+// We should load "@bahmutov/cy-api" TypeScript definition,
+// which will in turn load Cypress TypeScript definition.
+/// <reference types="@bahmutov/cy-api" />
 
 describe('following user', () => {
   const secondUser = {
@@ -59,5 +62,26 @@ describe('following user', () => {
         expect(c.text()).to.include('Unfollow seconduser')
       })
       .click()
+  })
+
+  it('user cannot follow themselves', () => {
+    const user = Cypress.env('user')
+    cy.getLoginToken(user).then(token => {
+      const apiUrl = Cypress.env('apiUrl')
+      cy.api({
+        method: 'POST',
+        url: `${apiUrl}/api/profiles/${user.username}/follow`,
+        headers: {
+          authorization: `Token ${token}`
+        },
+        failOnStatusCode: false // we expect failure
+      })
+        .its('body')
+        .should('deep.equal', {
+          errors: {
+            forbidden: ['You cannot follow yourself']
+          }
+        })
+    })
   })
 })

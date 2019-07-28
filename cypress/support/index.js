@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import '@cypress/code-coverage/support'
+import '@bahmutov/cy-api/support'
 
 const apiUrl = Cypress.env('apiUrl')
 
@@ -7,18 +8,24 @@ const apiUrl = Cypress.env('apiUrl')
 // and then set the received token in the local storage
 // can log in with default user or with a given one
 Cypress.Commands.add('login', (user = Cypress.env('user')) => {
-  cy.request('POST', `${apiUrl}/api/users/login`, {
-    user: Cypress._.pick(user, ['email', 'password'])
+  cy.getLoginToken(user).then(token => {
+    localStorage.setItem('jwt', token)
+    // with this token set, when we visit the page
+    // the web application will have the user logged in
   })
-    .its('body.user.token')
-    .should('exist')
-    .then(token => {
-      localStorage.setItem('jwt', token)
-      // with this token set, when we visit the page
-      // the web application will have the user logged in
-    })
 
   cy.visit('/')
+})
+
+// custom Cypress command to simply return a token after logging in
+// useful to perform authorized API calls
+Cypress.Commands.add('getLoginToken', (user = Cypress.env('user')) => {
+  return cy
+    .request('POST', `${apiUrl}/api/users/login`, {
+      user: Cypress._.pick(user, ['email', 'password'])
+    })
+    .its('body.user.token')
+    .should('exist')
 })
 
 // creates a user with email and password
@@ -27,7 +34,6 @@ Cypress.Commands.add('login', (user = Cypress.env('user')) => {
 // or given user info parameters
 Cypress.Commands.add('registerUserIfNeeded', (options = {}) => {
   const defaults = {
-    username: 'testuser',
     image: 'https://robohash.org/6FJ.png?set=set3&size=150x150',
     // email, password
     ...Cypress.env('user')

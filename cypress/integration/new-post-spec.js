@@ -48,6 +48,34 @@ describe('New post', () => {
       cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
     })
 
+    it('writes a post (via page object) and comments on it', () => {
+      // page object encapsulating code for writing a post
+      // by executing page commands = DOM actions
+      const editor = {
+        writeArticle () {
+          cy.get('[data-cy=new-post]').click()
+
+          cy.get('[data-cy=title]').type('my title')
+          cy.get('[data-cy=about]').type('about X')
+          cy.get('[data-cy=article]').type('this post is **important**.')
+          cy.get('[data-cy=tags]').type('test{enter}')
+          cy.get('[data-cy=publish]').click()
+
+          // changed url means the post was successfully created
+          cy.location('pathname').should('equal', '/article/my-title')
+        }
+      }
+
+      // use "Editor" page wrapper to write a new post
+      editor.writeArticle()
+
+      // comment on the post
+      cy.get('[data-cy=comment-text]').type('great post 👍')
+      cy.get('[data-cy=post-comment]').click()
+
+      cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+    })
+
     it('writes a post (via app action) and comments on it', () => {
       const article = {
         title: 'my title',

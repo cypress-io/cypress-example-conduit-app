@@ -126,3 +126,13 @@ Cypress.Commands.add('postArticle', fields => {
     }
   })
 })
+
+Cypress.Commands.add('writeArticle', article => {
+  cy.window()
+    .its('agent.Articles')
+    .invoke('create', article) // resolves with new article object
+    .its('article.slug')
+    .then(slug => {
+      cy.visit(`/article/${slug}`)
+    })
+})

@@ -10,20 +10,126 @@ describe('New post', () => {
     cy.login()
   })
 
-  it('writes a post and comments on it', () => {
-    cy.contains('a.nav-link', 'New Post').click()
+  it('writes a post', () => {
+    // I have added "data-cy" attributes
+    // following Cypress best practices
+    // https://on.cypress.io/best-practices#Selecting-Elements
+    cy.get('[data-cy=new-post]').click()
 
-    // I have added "data-cy" attributes to select input fields
     cy.get('[data-cy=title]').type('my title')
     cy.get('[data-cy=about]').type('about X')
     cy.get('[data-cy=article]').type('this post is **important**.')
     cy.get('[data-cy=tags]').type('test{enter}')
     cy.get('[data-cy=publish]').click()
 
-    cy.get('[data-cy=comment-text]').type('great post 👍')
-    cy.get('[data-cy=post-comment]').click()
+    // changed url means the post was successfully created
+    cy.location('pathname').should('equal', '/article/my-title')
+  })
 
-    cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+  context('comments', () => {
+    // notice how this test is 70% the same as the "writes a post" test above
+    // because to create a new post it executes same DOM commands
+    it('writes a post and comments on it', () => {
+      cy.get('[data-cy=new-post]').click()
+
+      cy.get('[data-cy=title]').type('my title')
+      cy.get('[data-cy=about]').type('about X')
+      cy.get('[data-cy=article]').type('this post is **important**.')
+      cy.get('[data-cy=tags]').type('test{enter}')
+      cy.get('[data-cy=publish]').click()
+
+      // changed url means the post was successfully created
+      cy.location('pathname').should('equal', '/article/my-title')
+
+      // comment on the post
+      cy.get('[data-cy=comment-text]').type('great post 👍')
+      cy.get('[data-cy=post-comment]').click()
+
+      cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+    })
+
+    it('writes a post (via page object) and comments on it', () => {
+      // page object encapsulating code for writing a post
+      // by executing page commands = DOM actions
+      const editor = {
+        writeArticle () {
+          cy.get('[data-cy=new-post]').click()
+
+          cy.get('[data-cy=title]').type('my title')
+          cy.get('[data-cy=about]').type('about X')
+          cy.get('[data-cy=article]').type('this post is **important**.')
+          cy.get('[data-cy=tags]').type('test{enter}')
+          cy.get('[data-cy=publish]').click()
+
+          // changed url means the post was successfully created
+          cy.location('pathname').should('equal', '/article/my-title')
+        }
+      }
+
+      // use "Editor" page wrapper to write a new post
+      editor.writeArticle()
+
+      // comment on the post
+      cy.get('[data-cy=comment-text]').type('great post 👍')
+      cy.get('[data-cy=post-comment]').click()
+
+      cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+    })
+
+    it('writes a post (via app action) and comments on it', () => {
+      const article = {
+        title: 'my title',
+        description: 'about X',
+        body: 'this post is **important**.',
+        tagList: ['test']
+      }
+      cy.window()
+        .its('agent.Articles')
+        .invoke('create', article) // resolves with new article object
+        .its('article.slug')
+        .then(slug => {
+          cy.visit(`/article/${slug}`)
+        })
+      // comment on the post
+      cy.get('[data-cy=comment-text]').type('great post 👍')
+      cy.get('[data-cy=post-comment]').click()
+
+      cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+    })
+
+    it('writes a post (via app action custom command) and comments on it', () => {
+      const article = {
+        title: 'my title',
+        description: 'about X',
+        body: 'this post is **important**.',
+        tagList: ['test']
+      }
+      cy.writeArticle(article)
+      // comment on the post
+      cy.get('[data-cy=comment-text]').type('great post 👍')
+      cy.get('[data-cy=post-comment]').click()
+
+      cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+    })
+
+    it('writes a post (via API) and comments on it', () => {
+      const article = {
+        title: 'my title',
+        description: 'about X',
+        body: 'this post is **important**.',
+        tagList: ['test']
+      }
+      cy.postArticle(article)
+        .its('body.article.slug')
+        .then(slug => {
+          cy.visit(`/article/${slug}`)
+        })
+      // comment on the post
+      cy.get('[data-cy=comment-text]').type('great post 👍')
+      cy.get('[data-cy=post-comment]').click()
+
+      cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+    })
   })
 
   it('can edit an article', () => {

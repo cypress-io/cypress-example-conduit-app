@@ -36,9 +36,7 @@ describe('New post', () => {
       cy.get('[data-cy=about]').type('about X')
       cy.get('[data-cy=article]').type('this post is **important**.')
       cy.get('[data-cy=tags]').type('test{enter}')
-      cy.get('[data-cy=publish]')
-        .pause()
-        .click()
+      cy.get('[data-cy=publish]').click()
 
       // changed url means the post was successfully created
       cy.location('pathname').should('equal', '/article/my-title')
@@ -64,6 +62,21 @@ describe('New post', () => {
         .then(slug => {
           cy.visit(`/article/${slug}`)
         })
+      // comment on the post
+      cy.get('[data-cy=comment-text]').type('great post 👍')
+      cy.get('[data-cy=post-comment]').click()
+
+      cy.contains('[data-cy=comment]', 'great post 👍').should('be.visible')
+    })
+
+    it('writes a post (via app action custom command) and comments on it', () => {
+      const article = {
+        title: 'my title',
+        description: 'about X',
+        body: 'this post is **important**.',
+        tagList: ['test']
+      }
+      cy.writeArticle(article)
       // comment on the post
       cy.get('[data-cy=comment-text]').type('great post 👍')
       cy.get('[data-cy=post-comment]').click()

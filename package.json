@@ -55,7 +55,7 @@
     "nyc": "14.1.1",
     "sqlite3": "4.0.9",
     "start-server-and-test": "1.9.1",
-    "stop-only": "3.0.1"
+    "stop-only": "3.1.0"
   },
   "husky": {
     "hooks": {

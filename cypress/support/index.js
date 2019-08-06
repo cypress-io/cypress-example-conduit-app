@@ -15,6 +15,7 @@ Cypress.Commands.add('login', (user = Cypress.env('user')) => {
   })
 
   cy.visit('/')
+  cy.get('[data-cy=global-feed]').should('be.visible')
 })
 
 // custom Cypress command to simply return a token after logging in
@@ -134,5 +135,24 @@ Cypress.Commands.add('writeArticle', article => {
     .its('article.slug')
     .then(slug => {
       cy.visit(`/article/${slug}`)
+      cy.wrap(slug)
     })
+})
+
+Cypress.Commands.add('postComment', (articleSlug, text) => {
+  const jwt = localStorage.getItem('jwt')
+  expect(jwt, 'jwt token').to.be.a('string')
+
+  cy.request({
+    method: 'POST',
+    url: `${apiUrl}/api/articles/${articleSlug}/comments`,
+    body: {
+      comment: {
+        body: text
+      }
+    },
+    headers: {
+      authorization: `Token ${jwt}`
+    }
+  })
 })

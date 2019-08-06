@@ -13,6 +13,6 @@
   },
   "viewportHeight": 1000,
   "viewportWidth": 1000,
-  "video": false,
+  "video": true,
   "projectId": "bh5j1d"
 }

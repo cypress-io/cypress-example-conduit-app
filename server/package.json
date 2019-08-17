@@ -48,6 +48,6 @@
     "eslint-plugin-hapi": "4.1.0",
     "hpal-debug": "1.3.2",
     "lab": "18.0.2",
-    "newman": "4.5.3"
+    "newman": "4.5.4"
   }
 }

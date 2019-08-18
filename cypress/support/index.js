@@ -134,7 +134,12 @@ Cypress.Commands.add('writeArticle', article => {
     .invoke('create', article) // resolves with new article object
     .its('article.slug')
     .then(slug => {
+      // make sure the article fully loads
+      // including its comments before proceeding
+      cy.server()
+      cy.route(`/api/articles/${slug}/comments`).as('comments')
       cy.visit(`/article/${slug}`)
+      cy.wait('@comments')
       cy.wrap(slug)
     })
 })
@@ -155,4 +160,7 @@ Cypress.Commands.add('postComment', (articleSlug, text) => {
       authorization: `Token ${jwt}`
     }
   })
+  // after posting comment through API,
+  // need to reload the page to see it
+  cy.reload()
 })

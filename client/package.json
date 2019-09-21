@@ -5,7 +5,7 @@
   "devDependencies": {
     "cross-env": "5.2.1",
     "parcel-bundler": "1.12.3",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.2"
   },
   "dependencies": {
     "@babel/core": "7.6.0",

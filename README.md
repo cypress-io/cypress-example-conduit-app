@@ -29,7 +29,7 @@ The combined report is saved in `coverage/index.html` after the tests finish:
 
 The coverage is sent to [Coveralls.io](https://coveralls.io/repos/github/cypress-io/cypress-example-realworld) using command `npm run coveralls` from CircleCI.
 
-To learn more, read the [Cypress code coverage guide](https://on.cypress.io/coverage).
+To learn more, read the [Cypress code coverage guide](https://on.cypress.io/code-coverage).
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/

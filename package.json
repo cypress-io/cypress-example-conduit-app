@@ -8,7 +8,7 @@
     "node": "10"
   },
   "scripts": {
-    "postinstall": "run-s ci:client ci:server cp:sqlite3",
+    "postinstall": "run-s ci:client ci:server",
     "ci:client": "cd client && npm ci",
     "ci:server": "cd server && npm ci",
     "build": "cd client && npm run build",
@@ -24,7 +24,6 @@
     "test:coverage": "start-test start:coverage 4100 cypress:test",
     "dev": "start-test start 4100 cypress:open",
     "dev:coverage": "start-test start:coverage 4100 cypress:open",
-    "cp:sqlite3": "cp -r node_sqlite3/node-v57-darwin-x64 node_modules/sqlite3/lib/binding && cp -r node_sqlite3/node-v57-linux-x64 node_modules/sqlite3/lib/binding",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "warn-only": "stop-only --warn --folder cypress/integration",
     "stop-only": "stop-only --folder cypress/integration"
@@ -47,7 +46,7 @@
     "common-tags": "1.8.0",
     "concurrently": "4.1.2",
     "coveralls": "3.0.7",
-    "cypress": "3.4.1",
+    "cypress": "3.5.0",
     "husky": "3.0.9",
     "istanbul-lib-coverage": "2.0.5",
     "knex": "0.19.5",

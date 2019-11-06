@@ -38,7 +38,7 @@
     "schwifty": "4.x.x",
     "secure-password": "3.x.x",
     "slugify": "1.x.x",
-    "sqlite3": "4.x.x",
+    "sqlite3": "4.1.0",
     "toys": "2.x.x"
   },
   "devDependencies": {

@@ -106,6 +106,7 @@ workflows:
 
       - cypress/run:
           pre-steps:
+            - checkout
             - run: npm ci
             - run:
                 name: Install Cypress pre-release

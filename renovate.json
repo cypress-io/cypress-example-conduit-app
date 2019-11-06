@@ -12,5 +12,11 @@
   "schedule": [
     "every weekend"
   ],
-  "masterIssue": true
+  "masterIssue": true,
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "separatePatchReleases": true,
+  "separateMultipleMajor": true,
+  "rangeStrategy": "pin"
 }

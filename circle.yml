@@ -108,6 +108,7 @@ workflows:
             - run: npx nyc report --reporter=text || true
             - save-partial-coverage-report:
                 label: e2e
+
       - merge-coverage:
           requires:
             - cypress/run

@@ -86,7 +86,8 @@ workflows:
           executor: cypress/base-10
           pre-steps:
             - run: npm config set unsafe-perm true
-          post-steps: npm install https://cdn.cypress.io/beta/npm/3.6.1/circle-issue-1096-firefox-support-42fcf58b442cc6bdbc35f3d5e2c34682f910badc-184085/cypress.tgz
+          post-steps:
+            - run: npm install https://cdn.cypress.io/beta/npm/3.6.1/circle-issue-1096-firefox-support-42fcf58b442cc6bdbc35f3d5e2c34682f910badc-184085/cypress.tgz
 
       - cypress/run:
           requires:

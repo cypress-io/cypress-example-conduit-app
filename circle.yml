@@ -44,7 +44,7 @@ commands:
             # note that the current folder is "project"
             # so we need to save the full path correctly
             # otherwise the files will not be restored in the expected location
-            - 'project/coverage-part/*'
+            - "project/coverage-part/*"
 
   merge-coverage-reports:
     description: |
@@ -108,6 +108,23 @@ workflows:
             - run: npx nyc report --reporter=text || true
             - save-partial-coverage-report:
                 label: e2e
+
+      - cypress/run:
+          name: Firefox
+          executor: cypress/browsers-chrome73-ff68
+          post-install:
+            - run:
+              name: Install Cypress pre-release
+              environment:
+                CYPRESS_INSTALL_BINARY: https://cdn.cypress.io/beta/binary/3.6.1/linux-x64/circle-issue-1096-firefox-support-42fcf58b442cc6bdbc35f3d5e2c34682f910badc-184089/cypress.zip
+              command: npm install https://cdn.cypress.io/beta/npm/3.6.1/circle-issue-1096-firefox-support-42fcf58b442cc6bdbc35f3d5e2c34682f910badc-184085/cypress.tgz
+          record: true
+          start: npm start
+          wait-on: http://localhost:4100
+          group: firefox
+          browser: firefox
+          no-workspace: true
+          spec: cypress/integration/login-spec.js
 
       - merge-coverage:
           requires:

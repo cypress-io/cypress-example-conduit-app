@@ -2,6 +2,7 @@
 
 import { title, about, article, tags } from '../fixtures/post'
 import { stripIndent } from 'common-tags'
+import { skipOn } from '@cypress/skip-test'
 
 describe('New post', () => {
   beforeEach(() => {
@@ -95,17 +96,18 @@ describe('New post', () => {
     tags.forEach((tag) => cy.contains('.tag-default', tag))
   })
 
-  it('sets the post body at once', () => {
-    cy.skipOn('firefox')
-    cy.contains('a.nav-link', 'New Post').click()
+  skipOn('firefox', () => {
+    // this test will run on every platform but Firefox
+    it('sets the post body at once', () => {
+      cy.contains('a.nav-link', 'New Post').click()
 
-    // I have added "data-cy" attributes to select input fields
-    cy.get('[data-cy=title]').type('my title')
-    cy.get('[data-cy=about]').type('about X')
+      // I have added "data-cy" attributes to select input fields
+      cy.get('[data-cy=title]').type('my title')
+      cy.get('[data-cy=about]').type('about X')
 
-    // to speed up creating the post, set the text as value
-    // and then trigger change event by typing "Enter"
-    const post = stripIndent`
+      // to speed up creating the post, set the text as value
+      // and then trigger change event by typing "Enter"
+      const post = stripIndent`
       # Fast tests
 
       > Speed up your tests using direct access to DOM elements
@@ -113,14 +115,15 @@ describe('New post', () => {
       You can set long text all at once and then trigger \`onChange\` event.
     `
 
-    cy.get('[data-cy=article]')
-      .invoke('val', post)
-      .type('{enter}')
+      cy.get('[data-cy=article]')
+        .invoke('val', post)
+        .type('{enter}')
 
-    cy.get('[data-cy=tags]').type('test{enter}')
-    cy.get('[data-cy=publish]').click()
+      cy.get('[data-cy=tags]').type('test{enter}')
+      cy.get('[data-cy=publish]').click()
 
-    cy.contains('h1', 'my title')
+      cy.contains('h1', 'my title')
+    })
   })
 
   it('adds a new post', () => {

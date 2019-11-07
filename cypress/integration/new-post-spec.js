@@ -92,10 +92,11 @@ describe('New post', () => {
 
     // check that each tag is displayed after post is shown
     cy.url().should('match', /my-title$/)
-    tags.forEach(tag => cy.contains('.tag-default', tag))
+    tags.forEach((tag) => cy.contains('.tag-default', tag))
   })
 
   it('sets the post body at once', () => {
+    cy.skipOn('firefox')
     cy.contains('a.nav-link', 'New Post').click()
 
     // I have added "data-cy" attributes to select input fields
@@ -142,7 +143,7 @@ describe('New post', () => {
       .invoke('dispatch', {
         type: 'UPDATE_FIELD_EDITOR',
         key: 'body',
-        value: article
+        value: article,
       })
 
     // need to click "Enter" after each tag
@@ -157,14 +158,14 @@ describe('New post', () => {
     // new article should be on the server
     cy.request('http://localhost:3000/api/articles?limit=10&offset=0')
       .its('body')
-      .should(body => {
+      .should((body) => {
         expect(body).to.have.property('articlesCount', 1)
         expect(body.articles).to.have.length(1)
         const firstPost = body.articles[0]
         expect(firstPost).to.contain({
           title,
           description: about,
-          body: article
+          body: article,
         })
         expect(firstPost.tagList).to.be.an('array')
         const sortedTags = firstPost.tagList.sort()
@@ -186,7 +187,7 @@ describe('New post', () => {
       .invoke('dispatch', {
         type: 'UPDATE_FIELD_EDITOR',
         key: 'body',
-        value: article
+        value: article,
       })
 
     // need to click "Enter" after each tag
@@ -209,7 +210,7 @@ describe('New post', () => {
       title: 'first post',
       description: 'first description',
       body: 'first article',
-      tagList: ['first', 'testing']
+      tagList: ['first', 'testing'],
     })
   })
 })

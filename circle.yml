@@ -121,10 +121,10 @@ workflows:
           record: true
           start: npm start
           wait-on: http://localhost:4100
-          group: firefox
+          group: Firefox Happy Path
           browser: firefox
           no-workspace: true
-          spec: "cypress/integration/login-spec.js"
+          spec: "cypress/integration/login-spec.js,cypress/integration/register-spec.js"
 
       - merge-coverage:
           requires:

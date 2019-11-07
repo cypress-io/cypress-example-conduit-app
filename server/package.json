@@ -23,8 +23,8 @@
     "boom": "7.x.x",
     "bounce": "1.x.x",
     "confidence": "4.x.x",
-    "glue": "6.x",
     "dotenv": "8.x",
+    "glue": "6.x",
     "hapi": "18.x.x",
     "hapi-auth-jwt2": "8.x.x",
     "haute-couture": ">=3.1.x <4",
@@ -36,9 +36,9 @@
     "randomstring": "1.x.x",
     "schmervice": "1.x.x",
     "schwifty": "4.x.x",
-    "secure-password": "3.x.x",
+    "secure-password": "3.1.0",
     "slugify": "1.x.x",
-    "sqlite3": "4.x.x",
+    "sqlite3": "4.1.0",
     "toys": "2.x.x"
   },
   "devDependencies": {

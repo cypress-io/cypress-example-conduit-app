@@ -124,7 +124,7 @@ workflows:
           group: firefox
           browser: firefox
           no-workspace: true
-          spec: cypress/integration/login-spec.js
+          spec: "cypress/integration/login-spec.js"
 
       - merge-coverage:
           requires:

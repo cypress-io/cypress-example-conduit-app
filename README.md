@@ -33,3 +33,5 @@ To learn more, read the [Cypress code coverage guide](https://on.cypress.io/cove
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/
+
+Requires Python 2.7 for node-gyp to be compiled.

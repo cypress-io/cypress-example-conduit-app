@@ -4,6 +4,11 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
 
+executors:
+  latest:
+    docker:
+      - image: cypress/browsers:node12.13.0-chrome78-ff70
+
 commands:
   save-partial-coverage-report:
     description: |
@@ -81,13 +86,14 @@ workflows:
   build:
     jobs:
       - cypress/install:
-          executor: cypress/base-10
+          executor: latest
           pre-steps:
             - run: npm config set unsafe-perm true
+
       - cypress/run:
           requires:
             - cypress/install
-          executor: cypress/base-10
+          executor: latest
           parallel: true
           parallelism: 2
           no-workspace: true
@@ -102,6 +108,7 @@ workflows:
             - run: npx nyc report --reporter=text || true
             - save-partial-coverage-report:
                 label: e2e
+
       - merge-coverage:
           requires:
             - cypress/run

@@ -30,7 +30,7 @@
     "haute-couture": "3.2.0",
     "joi": "14.3.1",
     "jsonwebtoken": "8.4.0",
-    "knex": "0.20.0",
+    "knex": "0.20.1",
     "objection": "1.5.0",
     "objection-db-errors": "1.0.0",
     "randomstring": "1.1.5",

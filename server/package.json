@@ -29,7 +29,7 @@
     "hapi-auth-jwt2": "8.2.0",
     "haute-couture": "3.4.0",
     "joi": "14.3.1",
-    "jsonwebtoken": "8.4.0",
+    "jsonwebtoken": "8.5.1",
     "knex": "0.20.1",
     "objection": "1.5.3",
     "objection-db-errors": "1.0.0",

@@ -31,7 +31,7 @@
     "joi": "14.3.1",
     "jsonwebtoken": "8.5.1",
     "knex": "0.20.1",
-    "objection": "1.5.3",
+    "objection": "1.6.11",
     "objection-db-errors": "1.0.0",
     "randomstring": "1.1.5",
     "schmervice": "1.1.0",

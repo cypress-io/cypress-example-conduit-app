@@ -66,3 +66,4 @@ typings/
 /cypress/videos/
 /cypress/screenshots/
 dist
+client/build

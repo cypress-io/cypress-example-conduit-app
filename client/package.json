@@ -28,7 +28,7 @@
   "scripts": {
     "start-old": "cross-env PORT=4100 BROWSER=NONE react-scripts start",
     "start": "parcel serve --port 4100 public/index.html",
-    "build": "react-scripts build",
+    "build": "cross-env CI= react-scripts build",
     "test": "cross-env PORT=4100 react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

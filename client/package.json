@@ -22,7 +22,7 @@
     "redux": "4.0.5",
     "redux-devtools-extension": "2.13.8",
     "redux-logger": "3.0.6",
-    "superagent": "5.1.4",
+    "superagent": "5.2.1",
     "superagent-promise": "1.1.0"
   },
   "scripts": {

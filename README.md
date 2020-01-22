@@ -27,7 +27,7 @@ The combined report is saved in `coverage/index.html` after the tests finish:
 
 ![Example full coverage report](images/full-coverage.png)
 
-The coverage is sent to [Coveralls.io](https://coveralls.io/repos/github/cypress-io/cypress-example-realworld) using command `npm run coveralls` from CircleCI.
+The coverage is sent to [Coveralls.io](https://coveralls.io/repos/github/cypress-io/cypress-example-realworld) using command `npm run coveralls` from CircleCI AFTER partial coverage information from parallel E2E test runs is combined, see [circle.yml](circle.yml) file.
 
 To learn more, read the [Cypress code coverage guide](https://on.cypress.io/coverage).
 

@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "engines": {
-    "node": "12.15.0"
+    "node": "12.16.0"
   },
   "scripts": {
     "postinstall": "run-s ci:client ci:server",

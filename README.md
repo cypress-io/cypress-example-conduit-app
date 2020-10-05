@@ -31,6 +31,10 @@ The combined report is saved in `coverage/index.html` after the tests finish:
 
 The coverage is sent to [Coveralls.io](https://coveralls.io/repos/github/cypress-io/cypress-example-realworld) using command `npm run coveralls` from CircleCI AFTER partial coverage information from parallel E2E test runs is combined, see [circle.yml](circle.yml) file.
 
+### Combining code coverage from parallel runs
+
+If you do not use an external code coverage service for combining code coverage reports, you need to combine those reports yourself like this repository is showing in [circle.yml](circle.yml) file. Several E2E `cypress/run` jobs run in parallel, each job saving its own coverage report folder. Then every job copies the report (using `save-partial-coverage-report` command) into a unique folder to avoid overwriting via reports from other machines. When all E2E jobs are finished, and reports are copied together, then the CI calls a command to merge the reports (see the `merge-coverage-reports` command that uses `nyc merge` tool).
+
 To learn more, read the [Cypress code coverage guide](https://on.cypress.io/coverage).
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg

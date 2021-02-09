@@ -64,5 +64,8 @@
   },
   "nyc": {
     "exclude": "server/lib/migrations"
+  },
+  "dependencies": {
+    "@cypress/skip-test": "1.2.1"
   }
 }

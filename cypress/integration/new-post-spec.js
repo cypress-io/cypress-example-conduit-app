@@ -2,6 +2,7 @@
 
 import { title, about, article, tags } from '../fixtures/post'
 import { stripIndent } from 'common-tags'
+import { skipOn } from '@cypress/skip-test'
 
 describe('New post', () => {
   beforeEach(() => {
@@ -92,19 +93,21 @@ describe('New post', () => {
 
     // check that each tag is displayed after post is shown
     cy.url().should('match', /my-title$/)
-    tags.forEach(tag => cy.contains('.tag-default', tag))
+    tags.forEach((tag) => cy.contains('.tag-default', tag))
   })
 
-  it('sets the post body at once', () => {
-    cy.contains('a.nav-link', 'New Post').click()
+  skipOn('firefox', () => {
+    // this test will run on every platform but Firefox
+    it('sets the post body at once', () => {
+      cy.contains('a.nav-link', 'New Post').click()
 
-    // I have added "data-cy" attributes to select input fields
-    cy.get('[data-cy=title]').type('my title')
-    cy.get('[data-cy=about]').type('about X')
+      // I have added "data-cy" attributes to select input fields
+      cy.get('[data-cy=title]').type('my title')
+      cy.get('[data-cy=about]').type('about X')
 
-    // to speed up creating the post, set the text as value
-    // and then trigger change event by typing "Enter"
-    const post = stripIndent`
+      // to speed up creating the post, set the text as value
+      // and then trigger change event by typing "Enter"
+      const post = stripIndent`
       # Fast tests
 
       > Speed up your tests using direct access to DOM elements
@@ -112,14 +115,15 @@ describe('New post', () => {
       You can set long text all at once and then trigger \`onChange\` event.
     `
 
-    cy.get('[data-cy=article]')
-      .invoke('val', post)
-      .type('{enter}')
+      cy.get('[data-cy=article]')
+        .invoke('val', post)
+        .type('{enter}')
 
-    cy.get('[data-cy=tags]').type('test{enter}')
-    cy.get('[data-cy=publish]').click()
+      cy.get('[data-cy=tags]').type('test{enter}')
+      cy.get('[data-cy=publish]').click()
 
-    cy.contains('h1', 'my title')
+      cy.contains('h1', 'my title')
+    })
   })
 
   it('adds a new post', () => {
@@ -142,7 +146,7 @@ describe('New post', () => {
       .invoke('dispatch', {
         type: 'UPDATE_FIELD_EDITOR',
         key: 'body',
-        value: article
+        value: article,
       })
 
     // need to click "Enter" after each tag
@@ -157,14 +161,14 @@ describe('New post', () => {
     // new article should be on the server
     cy.request('http://localhost:3000/api/articles?limit=10&offset=0')
       .its('body')
-      .should(body => {
+      .should((body) => {
         expect(body).to.have.property('articlesCount', 1)
         expect(body.articles).to.have.length(1)
         const firstPost = body.articles[0]
         expect(firstPost).to.contain({
           title,
           description: about,
-          body: article
+          body: article,
         })
         expect(firstPost.tagList).to.be.an('array')
         const sortedTags = firstPost.tagList.sort()
@@ -186,7 +190,7 @@ describe('New post', () => {
       .invoke('dispatch', {
         type: 'UPDATE_FIELD_EDITOR',
         key: 'body',
-        value: article
+        value: article,
       })
 
     // need to click "Enter" after each tag
@@ -209,7 +213,7 @@ describe('New post', () => {
       title: 'first post',
       description: 'first description',
       body: 'first article',
-      tagList: ['first', 'testing']
+      tagList: ['first', 'testing'],
     })
   })
 })

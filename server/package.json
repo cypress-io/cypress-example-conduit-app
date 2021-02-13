@@ -19,7 +19,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "avocat": "1.1.0",
+    "avocat": "2.0.0",
     "boom": "7.3.0",
     "bounce": "1.2.3",
     "confidence": "4.0.2",

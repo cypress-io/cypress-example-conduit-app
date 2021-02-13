@@ -25,7 +25,7 @@
     "confidence": "4.0.2",
     "dotenv": "8.2.0",
     "glue": "6.0.0",
-    "hapi": "18.0.0",
+    "hapi": "18.0.1",
     "hapi-auth-jwt2": "8.2.0",
     "haute-couture": "3.5.0",
     "joi": "14.3.1",

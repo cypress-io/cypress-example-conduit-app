@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "cross-env": "5.2.1",
+    "cross-env": "6.0.3",
     "parcel-bundler": "1.12.4",
     "react-scripts": "3.4.1"
   },

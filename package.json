@@ -42,7 +42,7 @@
   "devDependencies": {
     "@bahmutov/cy-api": "1.4.2",
     "@cypress/code-coverage": "1.14.0",
-    "babel-plugin-istanbul": "5.2.0",
+    "babel-plugin-istanbul": "6.0.0",
     "common-tags": "1.8.0",
     "concurrently": "4.1.2",
     "coveralls": "3.0.11",

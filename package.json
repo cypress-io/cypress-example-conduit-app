@@ -41,7 +41,7 @@
   "homepage": "https://github.com/bahmutov/realworld#readme",
   "devDependencies": {
     "@bahmutov/cy-api": "1.4.2",
-    "@cypress/code-coverage": "1.14.0",
+    "@cypress/code-coverage": "2.0.5",
     "babel-plugin-istanbul": "5.2.0",
     "common-tags": "1.8.0",
     "concurrently": "4.1.2",

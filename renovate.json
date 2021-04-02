@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "automerge": true,
   "major": {
     "automerge": false
@@ -9,14 +7,24 @@
   "prHourlyLimit": 2,
   "updateNotScheduled": false,
   "timezone": "America/New_York",
-  "schedule": [
-    "every weekend"
-  ],
+  "schedule": ["every weekend"],
   "masterIssue": true,
   "lockFileMaintenance": {
     "enabled": true
   },
   "separatePatchReleases": true,
   "separateMultipleMajor": true,
-  "rangeStrategy": "pin"
+  "rangeStrategy": "pin",
+  "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "excludePackagePatterns": [
+        "@bahmutov/cy-api",
+        "@cypress/code-coverage",
+        "cypress",
+        "istanbul-lib-coverage"
+      ],
+      "enabled": false
+    }
+  ]
 }

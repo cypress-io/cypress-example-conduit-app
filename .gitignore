@@ -67,3 +67,4 @@ typings/
 /cypress/screenshots/
 dist
 client/build
+client/.cache

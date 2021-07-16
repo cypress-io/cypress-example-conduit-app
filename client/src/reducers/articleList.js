@@ -18,7 +18,7 @@ export default (state = {}, action) => {
     case ARTICLE_UNFAVORITED:
       return {
         ...state,
-        articles: state.articles.map(article => {
+        articles: (state.articles || []).map(article => {
           if (article.slug === action.payload.article.slug) {
             return {
               ...article,

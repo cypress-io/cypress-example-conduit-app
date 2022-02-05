@@ -35,7 +35,7 @@ The coverage is sent to [Coveralls.io](https://coveralls.io/repos/github/cypress
 
 If you do not use an external code coverage service for combining code coverage reports, you need to combine those reports yourself like this repository is showing in [circle.yml](circle.yml) file. Several E2E `cypress/run` jobs run in parallel, each job saving its own coverage report folder. Then every job copies the report (using `save-partial-coverage-report` command) into a unique folder to avoid overwriting via reports from other machines. When all E2E jobs are finished, and reports are copied together, then the CI calls a command to merge the reports (see the `merge-coverage-reports` command that uses `nyc merge` tool).
 
-To learn more, read the [Cypress code coverage guide](https://on.cypress.io/coverage).
+To learn more, read the [Cypress code coverage guide](https://on.cypress.io/code-coverage).
 
 [renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
 [renovate-app]: https://renovateapp.com/
